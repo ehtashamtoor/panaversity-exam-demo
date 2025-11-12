@@ -18,9 +18,10 @@ export function AnswerOption({
 }: AnswerOptionProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
       disabled={isDisabled}
-      className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 flex items-start gap-4 group ${
+      className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 flex items-start gap-3 md:gap-4 group ${
         isSelected
           ? "bg-blue-500 bg-opacity-20 border-blue-400 border-opacity-100"
           : isDisabled
@@ -30,7 +31,7 @@ export function AnswerOption({
     >
       {/* Option Letter Circle */}
       <div
-        className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+        className={`shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-bold text-xs md:text-sm transition-all ${
           isSelected
             ? "bg-blue-500 text-white"
             : "bg-slate-600 text-slate-300 group-hover:bg-slate-500"
@@ -40,8 +41,8 @@ export function AnswerOption({
       </div>
 
       {/* Option Text */}
-      <div className="flex-1 text-slate-200 text-sm md:text-base">
-        <p className="leading-relaxed">{option}</p>
+      <div className="flex-1 min-w-0 text-slate-200 text-sm md:text-base">
+        <p className="leading-relaxed wrap-break-word">{option}</p>
       </div>
 
       {/* Selection Indicator */}

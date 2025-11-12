@@ -34,14 +34,14 @@ export function QuestionDisplay({
     <div className="bg-slate-800 rounded-xl border border-slate-700 shadow-2xl overflow-hidden animate-fadeIn">
       {/* Question Section */}
       <div className="p-6 md:p-8 border-b border-slate-700 bg-linear-to-r from-slate-800 to-slate-700">
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="flex-1">
-            <h2 className="text-lg md:text-xl font-semibold text-white leading-relaxed">
+        <div className="flex items-start justify-between gap-3 md:gap-4 mb-4">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg md:text-xl font-semibold text-white leading-relaxed wrap-break-word">
               {question.question}
             </h2>
           </div>
           <div className="shrink-0 px-3 py-1 bg-blue-500 bg-opacity-20 border border-blue-400 border-opacity-50 rounded-full">
-            <span className="text-xs md:text-sm font-medium text-blue-300">
+            <span className="text-xs md:text-sm font-medium text-blue-300 whitespace-nowrap">
               Q{questionNumber}
             </span>
           </div>

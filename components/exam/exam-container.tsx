@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAntiCheat } from "@/hooks/use-anti-cheat";
 import { useExamState } from "@/hooks/use-exam-state";
 import { loadExamQuestions } from "@/utils/exam-loader";
@@ -12,6 +12,8 @@ import { ExamHeader } from "./exam-header";
 import { LoadingScreen } from "./loading-screen";
 import { ErrorScreen } from "./error-screen";
 import { LandingPage } from "./landing-page";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { CustomAlertDialog } from "@/components/ui/custom-alert-dialog";
 
 export function ExamContainer() {
   const [examData, setExamData] = useState<ExamData | null>(null);
@@ -23,6 +25,7 @@ export function ExamContainer() {
   >("loading");
   const [timerDuration, setTimerDuration] = useState<number>(0);
   const [isAntiCheatEnabled, setIsAntiCheatEnabled] = useState(true);
+  const [showFullscreenWarning, setShowFullscreenWarning] = useState(false);
 
   // Load exam questions on mount
   useEffect(() => {
@@ -69,28 +72,36 @@ export function ExamContainer() {
 
   if (examState === "landing") {
     return (
-      <LandingPage
-        examMetadata={examData.exam}
-        onStartExam={async (customDuration) => {
-          const duration = customDuration || examData.exam.duration;
-          setTimerDuration(duration);
-          setIsAntiCheatEnabled(true);
+      <>
+        <LandingPage
+          examMetadata={examData.exam}
+          onStartExam={async (customDuration) => {
+            const duration = customDuration || examData.exam.duration;
+            setTimerDuration(duration);
+            setIsAntiCheatEnabled(true);
 
-          // Request fullscreen mode
-          try {
-            await document.documentElement.requestFullscreen();
-            setExamState("exam");
-          } catch (error) {
-            console.error("[FULLSCREEN] Failed to enter fullscreen:", error);
-            // Show warning but still start exam
-            alert(
-              "Please allow fullscreen mode for the exam. Press F11 or allow fullscreen when prompted."
-            );
-            setExamState("exam");
-          }
-        }}
-        isLoading={false}
-      />
+            // Request fullscreen mode
+            try {
+              await document.documentElement.requestFullscreen();
+              setExamState("exam");
+            } catch (error) {
+              console.error("[FULLSCREEN] Failed to enter fullscreen:", error);
+              // Show warning but still start exam
+              setShowFullscreenWarning(true);
+              setExamState("exam");
+            }
+          }}
+          isLoading={false}
+        />
+
+        <CustomAlertDialog
+          isOpen={showFullscreenWarning}
+          title="Fullscreen Required"
+          message="Please allow fullscreen mode for the exam. Press F11 or allow fullscreen when prompted. The exam will continue, but fullscreen is recommended."
+          variant="warning"
+          onClose={() => setShowFullscreenWarning(false)}
+        />
+      </>
     );
   }
 
@@ -136,6 +147,13 @@ function ExamContent({
     autoStart: false,
   });
 
+  // Track if we're intentionally submitting to ignore fullscreen changes
+  const isIntentionalSubmitRef = useRef(false);
+
+  // Dialog states
+  const [showSubmitEarlyDialog, setShowSubmitEarlyDialog] = useState(false);
+  const [showFullscreenAlert, setShowFullscreenAlert] = useState(false);
+
   // Start timer when exam begins
   useEffect(() => {
     if (examState === "exam" && timerDuration > 0) {
@@ -154,16 +172,26 @@ function ExamContent({
     }
   }, [isTimeUp, examState, setExamState, submitExam]);
 
+  // Handle exam completion (when user submits on last question)
+  useEffect(() => {
+    if (state.isCompleted && result && examState === "exam") {
+      setExamState("results");
+    }
+  }, [state.isCompleted, result, examState, setExamState]);
+
   // Enforce fullscreen - submit exam if exited
   useEffect(() => {
     const handleFullscreenChange = () => {
+      // Ignore fullscreen changes if we're intentionally submitting
+      if (isIntentionalSubmitRef.current) {
+        return;
+      }
+
       if (!document.fullscreenElement && examState === "exam") {
         submitExam();
         console.warn("[ANTI-CHEAT] Fullscreen exited - submitting exam");
         setExamState("results");
-        alert(
-          "Fullscreen mode was exited. Your exam has been submitted automatically."
-        );
+        setShowFullscreenAlert(true);
       }
     };
 
@@ -190,6 +218,33 @@ function ExamContent({
   const currentQuestion = examData.questions[state.currentQuestionIndex];
   const currentAnswer = getCurrentAnswer();
 
+  // Handle submit early with flag to prevent fullscreen handler from firing
+  const handleSubmitEarlyClick = () => {
+    // Set flag to ignore fullscreen changes during dialog
+    isIntentionalSubmitRef.current = true;
+    setShowSubmitEarlyDialog(true);
+  };
+
+  const handleSubmitEarlyConfirm = () => {
+    setShowSubmitEarlyDialog(false);
+    submitExam();
+    setExamState("results");
+  };
+
+  const handleSubmitEarlyCancel = async () => {
+    setShowSubmitEarlyDialog(false);
+    // User cancelled - restore fullscreen mode
+    try {
+      await document.documentElement.requestFullscreen();
+    } catch (error) {
+      console.error("[FULLSCREEN] Failed to restore fullscreen:", error);
+    }
+    // Reset flag after fullscreen is restored
+    setTimeout(() => {
+      isIntentionalSubmitRef.current = false;
+    }, 500);
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
       {/* Header with exam info and timer */}
@@ -199,6 +254,7 @@ function ExamContent({
         totalQuestions={examData.questions.length}
         timeLeft={timeLeft}
         isTimeRunningOut={timeLeft <= 300 && timeLeft > 0}
+        onSubmitEarly={handleSubmitEarlyClick}
       />
 
       {/* Main content area */}
@@ -242,6 +298,26 @@ function ExamContent({
           </p>
         </div>
       </div>
+
+      {/* Dialogs */}
+      <ConfirmDialog
+        isOpen={showSubmitEarlyDialog}
+        title="Submit Exam Early?"
+        message="Are you sure you want to submit your exam early? This action cannot be undone."
+        confirmText="Submit Exam"
+        cancelText="Continue Exam"
+        onConfirm={handleSubmitEarlyConfirm}
+        onCancel={handleSubmitEarlyCancel}
+        variant="warning"
+      />
+
+      <CustomAlertDialog
+        isOpen={showFullscreenAlert}
+        title="Exam Submitted"
+        message="Fullscreen mode was exited. Your exam has been submitted automatically."
+        variant="warning"
+        onClose={() => setShowFullscreenAlert(false)}
+      />
     </div>
   );
 }

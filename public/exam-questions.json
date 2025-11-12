@@ -45,8 +45,8 @@
     {
       "id": 4,
       "question": "What is the default model used by the OpenAI Agents SDK?",
-      "options": ["gpt-3.5-turbo", "gpt-4", "gpt-4.1", "gpt-5"],
-      "correctAnswer": 2,
+      "options": ["gpt-3.5-turbo", "gpt-4", "gpt-5", "gpt-4.1"],
+      "correctAnswer": 3,
       "explanation": "The default model is gpt-4.1, chosen for its balance of predictability and low latency in agentic workflows."
     },
     {
@@ -69,10 +69,10 @@
       "options": [
         "The original agent continues running in parallel",
         "The conversation history is cleared",
-        "The new agent receives complete conversation history and assumes control",
-        "Both agents share control equally"
+        "Both agents share control equally",
+        "The new agent receives complete conversation history and assumes control"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "When a handoff occurs, the new agent receives the entire conversation history and assumes control, with the original agent never returning to the loop."
     },
     {
@@ -114,8 +114,8 @@
     {
       "id": 11,
       "question": "Which decorator is used to transform a Python function into an agent tool?",
-      "options": ["@tool", "@agent_tool", "@function_tool", "@create_tool"],
-      "correctAnswer": 2,
+      "options": ["@function_tool", "@tool", "@agent_tool", "@create_tool"],
+      "correctAnswer": 0,
       "explanation": "The @function_tool decorator transforms any Python function into an agent tool with automatic schema generation."
     },
     {
@@ -135,11 +135,11 @@
       "question": "Which session implementation is recommended for development?",
       "options": [
         "SQLAlchemySession",
-        "OpenAIConversationsSession",
         "SQLiteSession",
+        "OpenAIConversationsSession",
         "EncryptedSession"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 1,
       "explanation": "SQLiteSession is recommended for development, offering both in-memory and file-based modes for simple persistence."
     },
     {
@@ -167,10 +167,10 @@
       "options": [
         "Multiple users from accessing the agent",
         "Excessive API costs",
-        "Infinite loops in agent execution",
-        "Concurrent tool executions"
+        "Concurrent tool executions",
+        "Infinite loops in agent execution"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The max_turns parameter prevents infinite loops by raising MaxTurnsExceeded when exceeded, with typical values ranging from 5 to 20+."
     },
     {
@@ -195,8 +195,8 @@
     {
       "id": 19,
       "question": "What method is used to create variations of existing agents?",
-      "options": ["duplicate()", "copy()", "clone()", "replicate()"],
-      "correctAnswer": 2,
+      "options": ["duplicate()", "copy()", "replicate()", "clone()"],
+      "correctAnswer": 3,
       "explanation": "The clone() method duplicates agents with modified properties using dataclasses.replace(), perfect for creating variations."
     },
     {
@@ -215,12 +215,12 @@
       "id": 21,
       "question": "What is the purpose of the RunContextWrapper?",
       "options": [
-        "To wrap API responses",
         "To provide dependency injection for user data and state",
+        "To wrap API responses",
         "To handle error messages",
         "To manage concurrent executions"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The RunContextWrapper provides dependency injection, passing user data, API clients, and state seamlessly to every agent, tool, and lifecycle hook."
     },
     {
@@ -252,11 +252,11 @@
       "question": "Which method converts a RunResult into input format for subsequent turns?",
       "options": [
         "convert_to_input()",
-        "to_input_list()",
         "format_input()",
+        "to_input_list()",
         "prepare_next_turn()"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 2,
       "explanation": "The to_input_list() method converts the result into input format for subsequent turns when not using sessions."
     },
     {
@@ -361,10 +361,10 @@
       "options": [
         "pip install openai-agents-litellm",
         "pip install openai-agents --with-litellm",
-        "pip install \"openai-agents[litellm]\"",
-        "pip install openai-agents && pip install litellm"
+        "pip install openai-agents && pip install litellm",
+        "pip install \"openai-agents[litellm]\""
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "To install with LiteLLM support for 100+ providers, use: pip install \"openai-agents[litellm]\"."
     },
     {
@@ -395,12 +395,12 @@
       "id": 36,
       "question": "Which context manager is used to create custom spans for tracing?",
       "options": [
-        "trace_span()",
         "custom_span()",
+        "trace_span()",
         "create_span()",
         "measure_span()"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The custom_span(name, data) context manager enables detailed workflow instrumentation by measuring specific operations like database queries or API calls."
     },
     {
@@ -415,11 +415,11 @@
       "question": "Which pattern is ideal when specialized agents should maintain domain ownership?",
       "options": [
         "Manager Pattern",
-        "Handoffs Pattern",
         "Sequential Pattern",
+        "Handoffs Pattern",
         "Parallel Pattern"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 2,
       "explanation": "The Handoffs Pattern is ideal when specialized agents should maintain domain ownership and continue natural conversation flow."
     },
     {
@@ -428,10 +428,10 @@
       "options": [
         "remove_last()",
         "delete_item()",
-        "pop_item()",
-        "clear_last()"
+        "clear_last()",
+        "pop_item()"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The pop_item() method removes and returns the most recent item from a session, useful for correction flows."
     },
     {
@@ -445,12 +445,12 @@
       "id": 41,
       "question": "What does the tool_use_behavior parameter control?",
       "options": [
-        "Which tools are available to the agent",
         "How tool outputs are processed",
+        "Which tools are available to the agent",
         "The order of tool execution",
         "Tool permission levels"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The tool_use_behavior parameter controls how tool outputs are processed, with options like 'run_llm_again' or 'stop_on_first_tool'."
     },
     {
@@ -470,11 +470,11 @@
       "question": "What is the purpose of the hooks parameter in Agent configuration?",
       "options": [
         "To integrate external APIs",
-        "To define callbacks for lifecycle events",
         "To manage error handling",
+        "To define callbacks for lifecycle events",
         "To configure logging levels"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 2,
       "explanation": "The hooks parameter accepts AgentHooks or RunHooks instances defining callbacks for lifecycle events like on_agent_start, on_llm_start, etc."
     },
     {
@@ -495,10 +495,10 @@
       "options": [
         "Only SQLite databases",
         "Only PostgreSQL databases",
-        "PostgreSQL, MySQL, and SQLite with async drivers",
-        "Only in-memory databases"
+        "Only in-memory databases",
+        "PostgreSQL, MySQL, and SQLite with async drivers"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "SQLAlchemySession integrates with production databases supporting PostgreSQL, MySQL, and SQLite with async operations."
     },
     {
@@ -516,8 +516,8 @@
     {
       "id": 47,
       "question": "What does the ImageGenerationTool integrate with?",
-      "options": ["Midjourney", "Stable Diffusion", "DALL-E", "Adobe Firefly"],
-      "correctAnswer": 2,
+      "options": ["DALL-E", "Midjourney", "Stable Diffusion", "Adobe Firefly"],
+      "correctAnswer": 0,
       "explanation": "ImageGenerationTool is a hosted tool that integrates with DALL-E for AI image generation capabilities."
     },
     {
@@ -550,10 +550,10 @@
       "options": [
         "Only Google format",
         "Only reStructuredText",
-        "Google, Sphinx, and NumPy formats",
-        "Only plain text"
+        "Only plain text",
+        "Google, Sphinx, and NumPy formats"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The SDK uses griffe to parse docstrings, supporting Google, Sphinx, and NumPy formats for extracting parameter descriptions."
     },
     {
@@ -584,12 +584,12 @@
       "id": 53,
       "question": "What is the primary difference between handoffs and agents-as-tools?",
       "options": [
-        "Handoffs are faster than agents-as-tools",
         "Handoffs transfer control completely; agents-as-tools return to caller",
+        "Handoffs are faster than agents-as-tools",
         "Agents-as-tools require more configuration",
         "Handoffs can only work with OpenAI models"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "Handoffs transfer control completely to the new agent, while agents-as-tools return to the caller after execution, maintaining orchestrator control."
     },
     {
@@ -634,10 +634,10 @@
       "options": [
         "Controls API rate limiting",
         "Manages user presence detection",
-        "Encourages topic diversity",
-        "Reduces latency"
+        "Reduces latency",
+        "Encourages topic diversity"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The presence_penalty parameter (range -2.0 to 2.0) encourages topic diversity in model outputs."
     },
     {
@@ -656,12 +656,12 @@
       "id": 59,
       "question": "What does the tool_choice parameter value 'required' mean?",
       "options": [
-        "The tool must be installed",
         "The LLM must use a tool",
+        "The tool must be installed",
         "The tool requires authentication",
         "The tool needs approval"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "When tool_choice is set to 'required', the LLM must use a tool rather than responding with text only."
     },
     {
@@ -692,12 +692,12 @@
       "id": 62,
       "question": "Which property identifies which agent produced the final output?",
       "options": [
+        "last_agent",
         "output_agent",
         "final_agent",
-        "last_agent",
         "responsible_agent"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 0,
       "explanation": "The last_agent property identifies which agent produced the final output, critical in multi-agent workflows."
     },
     {
@@ -729,11 +729,11 @@
       "question": "What does the HostedMCPTool run on?",
       "options": [
         "Local developer machines",
-        "OpenAI's infrastructure",
         "Cloud serverless functions",
-        "Edge computing nodes"
+        "Edge computing nodes",
+        "OpenAI's infrastructure"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "HostedMCPTool runs on OpenAI's infrastructure with tools listed and invoked without Python callbacks."
     },
     {
@@ -760,11 +760,11 @@
       "question": "Which parameter customizes how handoffs appear to the LLM?",
       "options": [
         "handoff_name",
-        "tool_name_override",
         "display_name",
+        "tool_name_override",
         "llm_name"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 2,
       "explanation": "The tool_name_override parameter customizes how the handoff appears to the LLM, improving routing accuracy."
     },
     {
@@ -782,8 +782,8 @@
     {
       "id": 70,
       "question": "Which class provides complete control over LLM integration?",
-      "options": ["CustomModel", "Model", "LLMIntegration", "ProviderModel"],
-      "correctAnswer": 1,
+      "options": ["Model", "CustomModel", "LLMIntegration", "ProviderModel"],
+      "correctAnswer": 0,
       "explanation": "Direct Model implementation inheritance enables complete control over LLM integration by implementing the Model base class."
     },
     {
@@ -815,11 +815,11 @@
       "question": "What does the LocalShellTool enable?",
       "options": [
         "Remote SSH access",
-        "Command execution on the local system",
         "Shell script generation",
-        "Terminal emulation"
+        "Terminal emulation",
+        "Command execution on the local system"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "LocalShellTool is a hosted tool that enables command execution on the local system."
     },
     {
@@ -910,12 +910,12 @@
       "id": 81,
       "question": "What does the failure_error_function parameter do?",
       "options": [
-        "Logs all failures automatically",
         "Enables custom error handling for tool failures",
+        "Logs all failures automatically",
         "Disables error reporting",
         "Sends error notifications"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The failure_error_function parameter enables custom error handling for tool failures, allowing custom error messages or logging."
     },
     {
@@ -935,11 +935,11 @@
       "question": "What does the top_p parameter provide?",
       "options": [
         "Priority ordering",
-        "Nucleus sampling as an alternative to temperature",
         "Top result filtering",
-        "Probability threshold"
+        "Probability threshold",
+        "Nucleus sampling as an alternative to temperature"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "The top_p parameter (0.0-1.0) provides nucleus sampling as an alternative to temperature for controlling randomness."
     },
     {
@@ -953,24 +953,24 @@
       "id": 85,
       "question": "What does the previous_response_id parameter enable?",
       "options": [
-        "Response caching",
         "Response chaining where each turn links to the previous response",
+        "Response caching",
         "Response versioning",
         "Response rollback"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The previous_response_id parameter enables response chaining where each turn explicitly links to the previous response."
     },
     {
       "id": 86,
       "question": "Which method fetches only MCP server tools from an agent?",
       "options": [
-        "get_mcp_tools()",
         "fetch_mcp_tools()",
         "list_mcp_tools()",
+        "get_mcp_tools()",
         "retrieve_mcp_tools()"
       ],
-      "correctAnswer": 0,
+      "correctAnswer": 2,
       "explanation": "The get_mcp_tools() method fetches only MCP server tools from an agent configuration."
     },
     {
@@ -989,12 +989,12 @@
       "id": 88,
       "question": "Which parameter controls whether to include token usage statistics?",
       "options": [
-        "track_usage",
         "include_usage",
+        "track_usage",
         "usage_enabled",
         "count_tokens"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The include_usage parameter in ModelSettings controls whether to include token usage statistics, required for LiteLLM tracking."
     },
     {
@@ -1026,11 +1026,11 @@
       "question": "What does the StopAtTools behavior do?",
       "options": [
         "Prevents all tool usage",
-        "Stops at specific tools based on tool names",
         "Halts on tool errors",
-        "Disables tool streaming"
+        "Disables tool streaming",
+        "Stops at specific tools based on tool names"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "StopAtTools(stop_at_tool_names=[...]) stops execution at specific tools, enabling sophisticated control flow."
     },
     {
@@ -1106,10 +1106,10 @@
       "options": [
         "external_prompt",
         "prompt_config",
-        "prompt",
-        "dynamic_prompt"
+        "dynamic_prompt",
+        "prompt"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The prompt parameter accepts a Prompt object or dynamic function for external prompt configuration with version control."
     },
     {
@@ -1128,12 +1128,12 @@
       "id": 100,
       "question": "Which feature enables approval workflows in MCP servers?",
       "options": [
-        "approval_enabled",
         "require_approval",
+        "approval_enabled",
         "enable_validation",
         "use_approval"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "The require_approval parameter configures approval workflows where tool calls require validation before execution."
     },
     {
@@ -1141,11 +1141,11 @@
       "question": "What does the @input_guardrail decorator do?",
       "options": [
         "Creates a new agent with guardrails",
-        "Marks a function as an input guardrail for agents",
         "Validates user input syntax",
-        "Encrypts input data"
+        "Encrypts input data",
+        "Marks a function as an input guardrail for agents"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "The @input_guardrail decorator marks an async function as an input guardrail that can be used with agents to validate incoming requests."
     },
     {
@@ -1178,10 +1178,10 @@
       "options": [
         "remove_tools",
         "filter_tools",
-        "remove_all_tools",
-        "clear_tool_history"
+        "clear_tool_history",
+        "remove_all_tools"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The remove_all_tools function from agents.extensions.handoff_filters removes all tool calls from the conversation history during handoffs."
     },
     {
@@ -1219,12 +1219,12 @@
       "id": 108,
       "question": "Which function creates a handoff for RealtimeAgent?",
       "options": [
+        "realtime_handoff()",
         "create_realtime_handoff()",
         "realtime_transfer()",
-        "realtime_handoff()",
         "voice_handoff()"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 0,
       "explanation": "The realtime_handoff() function creates a handoff configuration specifically for RealtimeAgent instances."
     },
     {
@@ -1273,8 +1273,8 @@
     {
       "id": 113,
       "question": "Which parameter specifies the voice to use in RealtimeAgent?",
-      "options": ["voice_id", "voice", "speaker", "audio_voice"],
-      "correctAnswer": 1,
+      "options": ["voice_id", "speaker", "audio_voice", "voice"],
+      "correctAnswer": 3,
       "explanation": "The voice parameter in model_settings specifies which voice to use, such as 'ash', 'ballad', or 'verse'."
     },
     {
@@ -1391,10 +1391,10 @@
       "options": [
         "fetch_prompt()",
         "load_prompt()",
-        "get_prompt()",
-        "retrieve_prompt()"
+        "retrieve_prompt()",
+        "get_prompt()"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The get_prompt() method retrieves dynamic prompts from MCP servers for context-aware instruction generation."
     },
     {
@@ -1414,11 +1414,11 @@
       "question": "Which parameter enables description override in @function_tool?",
       "options": [
         "custom_description",
-        "override_description",
         "description_override",
+        "override_description",
         "new_description"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 1,
       "explanation": "The description_override parameter in @function_tool allows customizing the tool's description instead of using the docstring."
     },
     {
@@ -1432,12 +1432,12 @@
       "id": 127,
       "question": "Which parameter disables docstring parsing in @function_tool?",
       "options": [
+        "use_docstring_info",
         "skip_docstring",
         "disable_parsing",
-        "use_docstring_info",
         "parse_docstring"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 0,
       "explanation": "Setting use_docstring_info=False in @function_tool disables automatic docstring parsing for parameter descriptions."
     },
     {
@@ -1489,12 +1489,12 @@
       "id": 133,
       "question": "What session method is used in AdvancedSQLiteSession to organize conversations by turns?",
       "options": [
+        "get_conversation_by_turns()",
         "get_turns()",
         "organize_by_turns()",
-        "get_conversation_by_turns()",
         "fetch_turns()"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 0,
       "explanation": "The get_conversation_by_turns() method in AdvancedSQLiteSession organizes the conversation history by individual turns."
     },
     {
@@ -1515,10 +1515,10 @@
       "options": [
         "search_turns()",
         "find_content()",
-        "find_turns_by_content()",
-        "search_conversation()"
+        "search_conversation()",
+        "find_turns_by_content()"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 3,
       "explanation": "The find_turns_by_content() method searches for turns containing specific content in AdvancedSQLiteSession."
     },
     {
@@ -1556,12 +1556,12 @@
       "id": 139,
       "question": "Which class represents the Responses API model in the SDK?",
       "options": [
-        "ResponseModel",
         "OpenAIResponsesModel",
+        "ResponseModel",
         "ResponsesAPIModel",
         "APIResponseModel"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 0,
       "explanation": "OpenAIResponsesModel represents OpenAI's Responses API, which is the recommended choice for OpenAI models."
     },
     {
@@ -1593,11 +1593,11 @@
       "question": "What does RunItemStreamEvent provide during streaming?",
       "options": [
         "Token-level updates",
-        "Item-level updates when complete items are produced",
         "Error notifications",
-        "Progress percentage"
+        "Progress percentage",
+        "Item-level updates when complete items are produced"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "RunItemStreamEvent provides item-level updates when complete items like messages or tool calls are produced during streaming."
     },
     {
@@ -1655,11 +1655,11 @@
       "question": "What does the 'metadata' parameter in ModelSettings provide?",
       "options": [
         "Agent metadata",
-        "Provider-specific metadata for requests",
         "Tool metadata",
-        "Session metadata"
+        "Session metadata",
+        "Provider-specific metadata for requests"
       ],
-      "correctAnswer": 1,
+      "correctAnswer": 3,
       "explanation": "The 'metadata' parameter in ModelSettings provides provider-specific metadata that can be attached to API requests."
     },
     {
