@@ -88,6 +88,20 @@ export function useExamState(questions: ExamQuestion[]) {
     return state.selectedAnswers[state.currentQuestionIndex] ?? null
   }, [state.selectedAnswers, state.currentQuestionIndex])
 
+  // Force submit exam (used for time up or fullscreen exit)
+  const submitExam = useCallback(() => {
+    setState((prev) => {
+      const calculatedResult = calculateResult(prev.selectedAnswers, questions)
+      setResult(calculatedResult)
+      return {
+        ...prev,
+        isExamActive: false,
+        isCompleted: true,
+        score: calculatedResult.correctAnswers,
+      }
+    })
+  }, [questions, calculateResult])
+
   // Reset exam function
   const resetExam = useCallback(() => {
     setState({
@@ -106,6 +120,7 @@ export function useExamState(questions: ExamQuestion[]) {
     selectAnswer,
     nextQuestion,
     getCurrentAnswer,
+    submitExam,
     resetExam,
   }
 }

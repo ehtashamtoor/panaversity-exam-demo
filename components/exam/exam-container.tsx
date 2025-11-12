@@ -71,11 +71,21 @@ export function ExamContainer() {
     return (
       <LandingPage
         examMetadata={examData.exam}
-        onStartExam={(customDuration) => {
+        onStartExam={async (customDuration) => {
           const duration = customDuration || examData.exam.duration;
           setTimerDuration(duration);
           setIsAntiCheatEnabled(true);
-          setExamState("exam");
+
+          // Request fullscreen mode
+          try {
+            await document.documentElement.requestFullscreen();
+            setExamState("exam");
+          } catch (error) {
+            console.error("[FULLSCREEN] Failed to enter fullscreen:", error);
+            // Show warning but still start exam
+            alert("Please allow fullscreen mode for the exam. Press F11 or allow fullscreen when prompted.");
+            setExamState("exam");
+          }
         }}
         isLoading={false}
       />
@@ -111,6 +121,7 @@ function ExamContent({
     selectAnswer,
     nextQuestion,
     getCurrentAnswer,
+    submitExam,
     resetExam,
   } = useExamState(examData.questions);
 
@@ -143,11 +154,14 @@ function ExamContent({
     }
   }, [isTimeUp, examState, setExamState]);
 
-  // Prevent full screen exit
+  // Enforce fullscreen - submit exam if exited
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement && examState === "exam") {
-        console.warn("[ANTI-CHEAT] Full screen exited");
+        console.warn("[ANTI-CHEAT] Fullscreen exited - submitting exam");
+        submitExam();
+        setExamState("results");
+        alert("Fullscreen mode was exited. Your exam has been submitted automatically.");
       }
     };
 
@@ -155,7 +169,7 @@ function ExamContent({
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
-  }, [examState]);
+  }, [examState, setExamState, submitExam]);
 
   if (examState === "results" && result) {
     return (

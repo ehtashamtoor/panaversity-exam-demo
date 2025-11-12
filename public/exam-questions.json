@@ -4,14 +4,15 @@
     "title": "Fundamentals of Agentic AI",
     "description": "Complete your examination carefully. Each answer is final - no back button available.",
     "examType": "Panaversity Exam",
-    "totalQuestions": 20,
+    "totalQuestions": 150,
     "duration": 170,
     "passingPercentage": 70,
     "instructions": [
       "Read each question carefully before answering",
       "Each answer is final - no back button available",
       "Your exam will auto-submit when time runs out",
-      "Anti-cheating measures are active"
+      "Anti-cheating measures are active",
+      "Exam must be taken in fullscreen mode - exiting fullscreen will auto-submit your exam"
     ]
   },
   "questions": [
@@ -29,2326 +30,1661 @@
     },
     {
       "id": 2,
-      "question": "Which design philosophy does the OpenAI Agents SDK follow?",
-      "options": [
-        "JavaScript-first",
-        "Python-first",
-        "Language-agnostic",
-        "TypeScript-first"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The SDK follows a Python-first design philosophy, leveraging Python idioms and conventions."
+      "question": "How many core primitives does the OpenAI Agents SDK have?",
+      "options": ["Two", "Three", "Four", "Five"],
+      "correctAnswer": 2,
+      "explanation": "The SDK operates on four core primitives: Agents, Handoffs, Guardrails, and Sessions."
     },
     {
       "id": 3,
-      "question": "What is the main class used to define an agent in the SDK?",
-      "options": ["AgentRunner", "OpenAIAgent", "Agent", "AIAgent"],
-      "correctAnswer": 2,
-      "explanation": "The Agent class is the main class used to define an agent in the SDK."
+      "question": "Which SDK did the OpenAI Agents Python SDK evolve from?",
+      "options": ["LangChain", "Swarm framework", "AutoGPT", "LlamaIndex"],
+      "correctAnswer": 1,
+      "explanation": "The SDK evolved from the experimental Swarm framework released in October 2024, incorporating critical production features."
     },
     {
       "id": 4,
-      "question": "What component is responsible for executing agent operations?",
-      "options": ["AgentExecutor", "Runner", "Processor", "Handler"],
-      "correctAnswer": 1,
-      "explanation": "The Runner component is responsible for executing agent operations."
+      "question": "What is the default model used by the OpenAI Agents SDK?",
+      "options": ["gpt-3.5-turbo", "gpt-4", "gpt-4.1", "gpt-5"],
+      "correctAnswer": 2,
+      "explanation": "The default model is gpt-4.1, chosen for its balance of predictability and low latency in agentic workflows."
     },
     {
       "id": 5,
-      "question": "Which SOLID principle is primarily demonstrated by separating Agent and Runner classes?",
-      "options": [
-        "Liskov Substitution Principle",
-        "Interface Segregation Principle",
-        "Single Responsibility Principle",
-        "Dependency Inversion Principle"
-      ],
+      "question": "What is the minimum Python version required to install the OpenAI Agents SDK?",
+      "options": ["Python 3.7", "Python 3.8", "Python 3.9", "Python 3.10"],
       "correctAnswer": 2,
-      "explanation": "The separation of Agent and Runner classes demonstrates the Single Responsibility Principle, where each class has a distinct responsibility."
+      "explanation": "Installing the SDK requires Python 3.9 or newer with the openai v2.x package."
     },
     {
       "id": 6,
-      "question": "What is the agent loop in the OpenAI Agents SDK?",
-      "options": [
-        "A circular import resolution mechanism",
-        "The core execution cycle that processes user input and generates responses",
-        "A debugging tool for agents",
-        "A performance optimization technique"
-      ],
+      "question": "Which class orchestrates agent execution in the SDK?",
+      "options": ["Agent", "Runner", "Session", "Handoff"],
       "correctAnswer": 1,
-      "explanation": "The agent loop is the core execution cycle that processes user input and generates responses."
+      "explanation": "The Runner class orchestrates agent execution through methods like run(), run_sync(), and run_streamed()."
     },
     {
       "id": 7,
-      "question": "How does the SDK handle multi-agent coordination?",
+      "question": "What happens when a handoff occurs in the SDK?",
       "options": [
-        "Through a centralized orchestrator",
-        "Using message passing between agents",
-        "Via shared memory",
-        "Through database synchronization"
+        "The original agent continues running in parallel",
+        "The conversation history is cleared",
+        "The new agent receives complete conversation history and assumes control",
+        "Both agents share control equally"
       ],
-      "correctAnswer": 1,
-      "explanation": "The SDK handles multi-agent coordination using message passing between agents."
+      "correctAnswer": 2,
+      "explanation": "When a handoff occurs, the new agent receives the entire conversation history and assumes control, with the original agent never returning to the loop."
     },
     {
       "id": 8,
-      "question": "What package manager is recommended for installing the OpenAI Agents SDK?",
-      "options": ["npm", "pip", "uv", "poetry"],
+      "question": "What are the two fundamental multi-agent patterns supported by the SDK?",
+      "options": [
+        "Sequential and Parallel",
+        "Manager Pattern and Handoffs Pattern",
+        "Centralized and Distributed",
+        "Synchronous and Asynchronous"
+      ],
       "correctAnswer": 1,
-      "explanation": "uv is the recommended package manager for installing the OpenAI Agents SDK."
+      "explanation": "The SDK supports the Manager Pattern (agents-as-tools with central orchestration) and the Handoffs Pattern (decentralized peer delegation)."
     },
     {
       "id": 9,
-      "question": "Which of the following is NOT a core component of the SDK?",
-      "options": ["Agent", "Runner", "Compiler", "Session"],
+      "question": "When do input guardrails execute?",
+      "options": [
+        "After the agent completes its response",
+        "During every agent turn",
+        "On initial user input, in parallel with the first agent turn",
+        "Only during handoffs"
+      ],
       "correctAnswer": 2,
-      "explanation": "Compiler is not a core component of the SDK. The core components are Agent, Runner, and Session."
+      "explanation": "Input guardrails execute on initial user input simultaneously with the first agent turn, allowing fast rejection of problematic requests before expensive model calls complete."
     },
     {
       "id": 10,
-      "question": "What is the primary data structure used for agent communication?",
+      "question": "What does the output_type parameter do?",
       "options": [
-        "XML messages",
-        "JSON objects",
-        "Protocol Buffers",
-        "Binary streams"
+        "Specifies the file format for logs",
+        "Defines the agent's communication protocol",
+        "Transforms agents from text generators into structured data producers",
+        "Sets the output encoding format"
       ],
-      "correctAnswer": 1,
-      "explanation": "JSON objects are the primary data structure used for agent communication."
+      "correctAnswer": 2,
+      "explanation": "The output_type parameter transforms agents from text generators into structured data producers by specifying a Pydantic model, dataclass, TypedDict, or list type."
     },
     {
       "id": 11,
-      "question": "Which Python version is minimum required for the OpenAI Agents SDK?",
-      "options": ["Python 3.7+", "Python 3.8+", "Python 3.9+", "Python 3.10+"],
-      "correctAnswer": 1,
-      "explanation": "Python 3.8+ is the minimum required version for the OpenAI Agents SDK."
+      "question": "Which decorator is used to transform a Python function into an agent tool?",
+      "options": ["@tool", "@agent_tool", "@function_tool", "@create_tool"],
+      "correctAnswer": 2,
+      "explanation": "The @function_tool decorator transforms any Python function into an agent tool with automatic schema generation."
     },
     {
       "id": 12,
-      "question": "What is the purpose of the ModelSettings class?",
+      "question": "What is the purpose of Sessions in the SDK?",
       "options": [
-        "To train new models",
-        "To configure model behavior and parameters",
-        "To manage model versions",
-        "To deploy models to production"
+        "To manage API authentication",
+        "To eliminate the manual burden of managing conversation history",
+        "To control agent execution order",
+        "To handle error logging"
       ],
       "correctAnswer": 1,
-      "explanation": "The ModelSettings class is used to configure model behavior and parameters."
+      "explanation": "Sessions eliminate the manual burden of managing conversation history across turns, automatically loading and storing conversation history."
     },
     {
       "id": 13,
-      "question": "Which component manages conversation context across multiple turns?",
+      "question": "Which session implementation is recommended for development?",
       "options": [
-        "ContextManager",
-        "Session",
-        "ConversationHandler",
-        "DialogManager"
+        "SQLAlchemySession",
+        "OpenAIConversationsSession",
+        "SQLiteSession",
+        "EncryptedSession"
       ],
-      "correctAnswer": 1,
-      "explanation": "The Session component manages conversation context across multiple turns."
+      "correctAnswer": 2,
+      "explanation": "SQLiteSession is recommended for development, offering both in-memory and file-based modes for simple persistence."
     },
     {
       "id": 14,
-      "question": "What is the default model used in the SDK if not specified?",
-      "options": [
-        "gpt-3.5-turbo",
-        "gpt-4",
-        "gpt-4-turbo",
-        "Varies based on configuration"
-      ],
-      "correctAnswer": 3,
-      "explanation": "The default model varies based on configuration."
+      "question": "How many LLM providers does the SDK support through LiteLLM?",
+      "options": ["10+", "50+", "100+", "200+"],
+      "correctAnswer": 2,
+      "explanation": "The SDK supports 100+ LLM providers through LiteLLM, including Anthropic Claude, Google Gemini, Azure, Bedrock, and Mistral."
     },
     {
       "id": 15,
-      "question": "How does the SDK handle asynchronous operations?",
+      "question": "Is tracing enabled by default in the SDK?",
       "options": [
-        "Using threading",
-        "Using multiprocessing",
-        "Using async/await pattern",
-        "Synchronous operations only"
+        "No, it must be manually enabled",
+        "Yes, it is enabled by default",
+        "Only in production mode",
+        "Only for error cases"
       ],
-      "correctAnswer": 2,
-      "explanation": "The SDK uses the async/await pattern to handle asynchronous operations."
+      "correctAnswer": 1,
+      "explanation": "Tracing is enabled by default and sends execution data to OpenAI's platform for visualization and debugging at platform.openai.com/traces."
     },
     {
       "id": 16,
-      "question": "What is the purpose of the 'instructions' parameter in an Agent?",
+      "question": "What does the max_turns parameter prevent?",
       "options": [
-        "To provide setup instructions for developers",
-        "To define the agent's behavior and role",
-        "To specify installation steps",
-        "To document the agent's code"
+        "Multiple users from accessing the agent",
+        "Excessive API costs",
+        "Infinite loops in agent execution",
+        "Concurrent tool executions"
       ],
-      "correctAnswer": 1,
-      "explanation": "The 'instructions' parameter defines the agent's behavior and role."
+      "correctAnswer": 2,
+      "explanation": "The max_turns parameter prevents infinite loops by raising MaxTurnsExceeded when exceeded, with typical values ranging from 5 to 20+."
     },
     {
       "id": 17,
-      "question": "Which of the following best describes the SDK's architecture?",
+      "question": "What does MCP stand for in the SDK?",
       "options": [
-        "Monolithic",
-        "Microservices",
-        "Modular and extensible",
-        "Serverless"
+        "Multi-Component Protocol",
+        "Model Context Protocol",
+        "Message Communication Protocol",
+        "Management Control Panel"
       ],
-      "correctAnswer": 2,
-      "explanation": "The SDK's architecture is modular and extensible, allowing for flexibility and customization."
+      "correctAnswer": 1,
+      "explanation": "MCP stands for Model Context Protocol, which provides a standardized way to connect agents to external tools and services."
     },
     {
       "id": 18,
-      "question": "What is the relationship between Agent and Runner?",
-      "options": [
-        "Inheritance",
-        "Composition",
-        "Aggregation",
-        "No relationship"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Agent and Runner have a composition relationship, where Runner uses Agent."
+      "question": "Which temperature range is typically recommended for factual tasks?",
+      "options": ["0.7-1.0", "1.0-1.5", "0.1-0.3", "1.5-2.0"],
+      "correctAnswer": 2,
+      "explanation": "Factual tasks typically use temperature values of 0.1-0.3 for more deterministic outputs, while creative tasks use 0.7-1.0."
     },
     {
       "id": 19,
-      "question": "How are errors typically handled in the agent loop?",
-      "options": [
-        "Silent failures",
-        "System crashes",
-        "Exception handling with retry logic",
-        "Automatic rollback"
-      ],
+      "question": "What method is used to create variations of existing agents?",
+      "options": ["duplicate()", "copy()", "clone()", "replicate()"],
       "correctAnswer": 2,
-      "explanation": "Errors are typically handled using exception handling with retry logic."
+      "explanation": "The clone() method duplicates agents with modified properties using dataclasses.replace(), perfect for creating variations."
     },
     {
       "id": 20,
-      "question": "What is the purpose of the 'name' parameter when creating an Agent?",
+      "question": "Which hosted tool enables real-time web search capabilities?",
       "options": [
-        "For debugging and identification",
-        "To specify the model name",
-        "To name the output file",
-        "For database indexing"
+        "SearchTool",
+        "WebSearchTool",
+        "InternetSearchTool",
+        "BrowserTool"
       ],
-      "correctAnswer": 0,
-      "explanation": "The 'name' parameter is used for debugging and identification purposes."
+      "correctAnswer": 1,
+      "explanation": "WebSearchTool provides real-time web search capabilities and is one of the hosted tools that run on LLM servers."
     },
     {
       "id": 21,
-      "question": "Which design pattern is most evident in the Runner implementation?",
-      "options": ["Singleton", "Factory", "Observer", "Strategy"],
-      "correctAnswer": 3,
-      "explanation": "The Strategy pattern is most evident in the Runner implementation."
+      "question": "What is the purpose of the RunContextWrapper?",
+      "options": [
+        "To wrap API responses",
+        "To provide dependency injection for user data and state",
+        "To handle error messages",
+        "To manage concurrent executions"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The RunContextWrapper provides dependency injection, passing user data, API clients, and state seamlessly to every agent, tool, and lifecycle hook."
     },
     {
       "id": 22,
-      "question": "What is the primary benefit of using the SDK over direct API calls?",
+      "question": "Which API does the SDK recommend for OpenAI models?",
       "options": [
-        "Lower costs",
-        "Faster response times",
-        "Abstraction and simplified multi-agent workflows",
-        "Access to more models"
+        "Chat Completions API",
+        "Completions API",
+        "Responses API",
+        "Embeddings API"
       ],
       "correctAnswer": 2,
-      "explanation": "The primary benefit is abstraction and simplified multi-agent workflows."
+      "explanation": "The SDK works seamlessly with OpenAI's Responses API (recommended) and Chat Completions API, with Responses API being the recommended choice."
     },
     {
       "id": 23,
-      "question": "How does the SDK maintain backward compatibility?",
+      "question": "What happens when a guardrail's tripwire is triggered?",
       "options": [
-        "By never changing APIs",
-        "Through versioning and deprecation warnings",
-        "It doesn't maintain backward compatibility",
-        "By using only stable features"
+        "The agent continues with a warning",
+        "Execution halts immediately with an exception",
+        "The request is logged and forwarded",
+        "The agent retries with different parameters"
       ],
       "correctAnswer": 1,
-      "explanation": "The SDK maintains backward compatibility through versioning and deprecation warnings."
+      "explanation": "When a guardrail's tripwire is triggered, execution halts immediately with InputGuardrailTripwireTriggered or OutputGuardrailTripwireTriggered exceptions."
     },
     {
       "id": 24,
-      "question": "What is the role of the 'model' parameter in Agent configuration?",
+      "question": "Which method converts a RunResult into input format for subsequent turns?",
       "options": [
-        "To specify the ML framework",
-        "To define which OpenAI model to use",
-        "To set the data model",
-        "To configure the architecture pattern"
+        "convert_to_input()",
+        "to_input_list()",
+        "format_input()",
+        "prepare_next_turn()"
       ],
       "correctAnswer": 1,
-      "explanation": "The 'model' parameter defines which OpenAI model to use."
+      "explanation": "The to_input_list() method converts the result into input format for subsequent turns when not using sessions."
     },
     {
       "id": 25,
-      "question": "Which of the following is a key characteristic of the Python-first design?",
+      "question": "What does the agent.as_tool() method do?",
       "options": [
-        "Only works with Python 2",
-        "Leverages Python idioms and conventions",
-        "Requires Python for all operations",
-        "Uses Python syntax in all languages"
+        "Converts tools into agents",
+        "Transforms agents into tools for hierarchical orchestration",
+        "Creates a new agent instance",
+        "Validates agent configuration"
       ],
       "correctAnswer": 1,
-      "explanation": "The Python-first design leverages Python idioms and conventions."
+      "explanation": "The agent.as_tool() method transforms agents into tools to create hierarchical orchestration without handoffs, allowing the orchestrator to retain control."
     },
     {
       "id": 26,
-      "question": "What decorator is used to define a function tool?",
-      "options": ["@tool", "@function_tool", "@agent_tool", "@register_tool"],
-      "correctAnswer": 1,
-      "explanation": "The @function_tool decorator is used to define a function tool."
+      "question": "Which session implementation provides transparent encryption?",
+      "options": [
+        "SQLiteSession",
+        "SQLAlchemySession",
+        "EncryptedSession",
+        "OpenAIConversationsSession"
+      ],
+      "correctAnswer": 2,
+      "explanation": "EncryptedSession wraps other sessions with transparent Fernet encryption and TTL-based expiration for secure storage."
     },
     {
       "id": 27,
-      "question": "Which parameter allows an agent to access other agents?",
-      "options": ["sub_agents", "child_agents", "agents", "handoffs"],
-      "correctAnswer": 3,
-      "explanation": "The 'handoffs' parameter allows an agent to access other agents."
-    },
-    {
-      "id": 28,
-      "question": "What type of object is returned when calling runner.run()?",
-      "options": ["String", "Response object", "Dictionary", "List"],
-      "correctAnswer": 1,
-      "explanation": "A Response object is returned when calling runner.run()."
-    },
-    {
-      "id": 29,
-      "question": "How do you specify tools for an agent?",
+      "question": "What is the purpose of parallel_tool_calls parameter?",
       "options": [
-        "agent.add_tools()",
-        "Through the 'tools' parameter in Agent constructor",
-        "Using agent.register_tools()",
-        "Via configuration file"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Tools are specified through the 'tools' parameter in the Agent constructor."
-    },
-    {
-      "id": 30,
-      "question": "What is the purpose of the 'parallel_tool_calls' setting?",
-      "options": [
-        "To enable multithreading",
-        "To allow multiple tools to be called simultaneously",
-        "To process multiple agents in parallel",
+        "To run multiple agents simultaneously",
+        "To enable or disable multiple simultaneous tool invocations",
+        "To parallelize guardrail checks",
         "To handle concurrent user requests"
       ],
       "correctAnswer": 1,
-      "explanation": "The 'parallel_tool_calls' setting allows multiple tools to be called simultaneously."
+      "explanation": "The parallel_tool_calls parameter enables or disables multiple simultaneous tool invocations, reducing latency when tools are independent."
+    },
+    {
+      "id": 28,
+      "question": "Which GPT-5 model setting controls reasoning depth?",
+      "options": [
+        "reasoning.effort",
+        "thinking.depth",
+        "analysis.level",
+        "processing.intensity"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The reasoning.effort parameter accepts levels like 'minimal', 'low', 'medium', and 'high' for GPT-5 models, controlling reasoning depth and speed."
+    },
+    {
+      "id": 29,
+      "question": "What does the FileSearchTool provide?",
+      "options": [
+        "Local file system browsing",
+        "Vector store retrieval capabilities",
+        "Text file editing",
+        "File compression utilities"
+      ],
+      "correctAnswer": 1,
+      "explanation": "FileSearchTool is a hosted tool that provides vector store retrieval capabilities for semantic search over documents."
+    },
+    {
+      "id": 30,
+      "question": "Which method is used to retrieve recent conversation history from a session?",
+      "options": [
+        "fetch_items()",
+        "retrieve_history()",
+        "get_items()",
+        "load_messages()"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The get_items(limit=N) method retrieves recent conversation history from a session, useful for displaying conversation context."
     },
     {
       "id": 31,
-      "question": "Which ModelSettings parameter controls response randomness?",
-      "options": ["randomness", "temperature", "variance", "entropy"],
+      "question": "What is the purpose of input filters in handoffs?",
+      "options": [
+        "To validate input data types",
+        "To control what conversation context passes to the next agent",
+        "To compress conversation history",
+        "To encrypt sensitive information"
+      ],
       "correctAnswer": 1,
-      "explanation": "The 'temperature' parameter controls response randomness."
+      "explanation": "Input filters control what conversation context passes to the next agent during handoffs, useful for privacy, reducing context size, or focusing attention."
     },
     {
       "id": 32,
-      "question": "What does the 'max_tokens' parameter limit?",
+      "question": "Which exception is raised when max_turns is exceeded?",
       "options": [
-        "Input size",
-        "Total conversation length",
-        "Generated response length",
-        "Number of API calls"
+        "TurnLimitException",
+        "MaxTurnsExceeded",
+        "AgentLoopError",
+        "ExecutionLimitReached"
       ],
-      "correctAnswer": 2,
-      "explanation": "The 'max_tokens' parameter limits the generated response length."
+      "correctAnswer": 1,
+      "explanation": "The MaxTurnsExceeded exception is raised when the agent loop exceeds the max_turns limit, typically from infinite reasoning loops."
     },
     {
       "id": 33,
-      "question": "How can you provide example messages to an agent?",
+      "question": "What command is used to install the SDK with LiteLLM support?",
       "options": [
-        "Through the 'examples' parameter",
-        "Using the 'messages' parameter with role='example'",
-        "Via the training() method",
-        "Examples are not supported"
+        "pip install openai-agents-litellm",
+        "pip install openai-agents --with-litellm",
+        "pip install \"openai-agents[litellm]\"",
+        "pip install openai-agents && pip install litellm"
       ],
-      "correctAnswer": 1,
-      "explanation": "Example messages can be provided using the 'messages' parameter with role='example'."
+      "correctAnswer": 2,
+      "explanation": "To install with LiteLLM support for 100+ providers, use: pip install \"openai-agents[litellm]\"."
     },
     {
       "id": 34,
-      "question": "What is the purpose of the 'tool_choice' parameter?",
+      "question": "When do output guardrails execute?",
       "options": [
-        "To list available tools",
-        "To force or prevent tool usage",
-        "To prioritize tools",
-        "To configure tool permissions"
+        "Before the agent starts processing",
+        "During every tool call",
+        "Only when the agent is the last in the workflow",
+        "At random intervals for security"
       ],
-      "correctAnswer": 1,
-      "explanation": "The 'tool_choice' parameter is used to force or prevent tool usage."
+      "correctAnswer": 2,
+      "explanation": "Output guardrails validate final agent responses before delivery, executing only if the agent is the last in the workflow."
     },
     {
       "id": 35,
-      "question": "Which parameter sets the format for tool responses?",
+      "question": "What does the CodeInterpreterTool enable?",
       "options": [
-        "response_format",
-        "output_format",
-        "tool_format",
-        "result_format"
+        "JavaScript execution in the browser",
+        "Sandboxed Python execution and data analysis",
+        "Code translation between languages",
+        "Syntax highlighting for code snippets"
       ],
-      "correctAnswer": 0,
-      "explanation": "The 'response_format' parameter sets the format for tool responses."
+      "correctAnswer": 1,
+      "explanation": "CodeInterpreterTool is a hosted tool that provides sandboxed Python execution and data analysis capabilities."
     },
     {
       "id": 36,
-      "question": "How do you create an agent that uses GPT-4?",
+      "question": "Which context manager is used to create custom spans for tracing?",
       "options": [
-        "Agent(engine='gpt-4')",
-        "Agent(model='gpt-4')",
-        "Agent(version='gpt-4')",
-        "Agent(gpt4=True)"
+        "trace_span()",
+        "custom_span()",
+        "create_span()",
+        "measure_span()"
       ],
       "correctAnswer": 1,
-      "explanation": "You create an agent that uses GPT-4 by specifying Agent(model='gpt-4')."
+      "explanation": "The custom_span(name, data) context manager enables detailed workflow instrumentation by measuring specific operations like database queries or API calls."
     },
     {
       "id": 37,
-      "question": "What is the purpose of the 'top_p' parameter in ModelSettings?",
-      "options": [
-        "To set the maximum probability",
-        "For nucleus sampling",
-        "To limit top responses",
-        "To configure priority levels"
-      ],
+      "question": "What is the default reasoning.effort level for GPT-5 models in the SDK?",
+      "options": ["minimal", "low", "medium", "high"],
       "correctAnswer": 1,
-      "explanation": "The 'top_p' parameter is used for nucleus sampling."
+      "explanation": "The SDK automatically applies sensible defaults with reasoning.effort='low' for GPT-5 reasoning models."
     },
     {
       "id": 38,
-      "question": "Which method is used to update an agent's instructions dynamically?",
+      "question": "Which pattern is ideal when specialized agents should maintain domain ownership?",
       "options": [
-        "agent.set_instructions()",
-        "agent.update()",
-        "Reassign the instructions attribute",
-        "agent.modify_instructions()"
+        "Manager Pattern",
+        "Handoffs Pattern",
+        "Sequential Pattern",
+        "Parallel Pattern"
       ],
-      "correctAnswer": 2,
-      "explanation": "You update an agent's instructions dynamically by reassigning the instructions attribute."
+      "correctAnswer": 1,
+      "explanation": "The Handoffs Pattern is ideal when specialized agents should maintain domain ownership and continue natural conversation flow."
     },
     {
       "id": 39,
-      "question": "What happens when parallel_tool_calls is set to False?",
+      "question": "What method is used to remove the most recent item from a session?",
       "options": [
-        "Tools cannot be called",
-        "Tools are called sequentially",
-        "Only one tool can be registered",
-        "Performance is improved"
+        "remove_last()",
+        "delete_item()",
+        "pop_item()",
+        "clear_last()"
       ],
-      "correctAnswer": 1,
-      "explanation": "When parallel_tool_calls is set to False, tools are called sequentially."
+      "correctAnswer": 2,
+      "explanation": "The pop_item() method removes and returns the most recent item from a session, useful for correction flows."
     },
     {
       "id": 40,
-      "question": "How do you specify a custom system message for an agent?",
-      "options": [
-        "Through the 'system_message' parameter",
-        "Using the 'instructions' parameter",
-        "Via agent.set_system_message()",
-        "System messages are automatic"
-      ],
+      "question": "Which hosted tool enables UI automation?",
+      "options": ["AutomationTool", "ComputerTool", "UITool", "BrowserTool"],
       "correctAnswer": 1,
-      "explanation": "A custom system message is specified using the 'instructions' parameter."
+      "explanation": "ComputerTool is a hosted tool that provides UI automation capabilities."
     },
     {
       "id": 41,
-      "question": "What is the default value of temperature if not specified?",
-      "options": ["0.0", "0.5", "1.0", "0.7"],
-      "correctAnswer": 2,
-      "explanation": "The default value of temperature is 1.0."
+      "question": "What does the tool_use_behavior parameter control?",
+      "options": [
+        "Which tools are available to the agent",
+        "How tool outputs are processed",
+        "The order of tool execution",
+        "Tool permission levels"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The tool_use_behavior parameter controls how tool outputs are processed, with options like 'run_llm_again' or 'stop_on_first_tool'."
     },
     {
       "id": 42,
-      "question": "Which parameter would you use to ensure deterministic outputs?",
+      "question": "Which event type in streaming provides token-by-token deltas?",
       "options": [
-        "deterministic=True",
-        "temperature=0",
-        "random_state=42",
-        "seed value"
+        "TokenStreamEvent",
+        "RawResponsesStreamEvent",
+        "DeltaStreamEvent",
+        "TextStreamEvent"
       ],
       "correctAnswer": 1,
-      "explanation": "Setting temperature=0 ensures deterministic outputs."
+      "explanation": "RawResponsesStreamEvent contains token-by-token deltas from the LLM, perfect for displaying text as it generates."
     },
     {
       "id": 43,
-      "question": "How are agent handoffs configured?",
+      "question": "What is the purpose of the hooks parameter in Agent configuration?",
       "options": [
-        "Through a separate configuration file",
-        "Using the 'handoffs' parameter with a list of agents",
-        "Via the HandoffManager class",
-        "Handoffs are automatic"
+        "To integrate external APIs",
+        "To define callbacks for lifecycle events",
+        "To manage error handling",
+        "To configure logging levels"
       ],
       "correctAnswer": 1,
-      "explanation": "Agent handoffs are configured using the 'handoffs' parameter with a list of agents."
+      "explanation": "The hooks parameter accepts AgentHooks or RunHooks instances defining callbacks for lifecycle events like on_agent_start, on_llm_start, etc."
     },
     {
       "id": 44,
-      "question": "What type should function tool parameters be annotated with?",
+      "question": "Which session method wipes all conversation history?",
       "options": [
-        "Any type",
-        "String only",
-        "Python type hints",
-        "JSON schema"
+        "reset_session()",
+        "delete_all()",
+        "clear_session()",
+        "remove_history()"
       ],
       "correctAnswer": 2,
-      "explanation": "Function tool parameters should be annotated with Python type hints."
+      "explanation": "The clear_session() method wipes all history from a session, appropriate for new topics or privacy concerns."
     },
     {
       "id": 45,
-      "question": "Which parameter controls whether to stream responses?",
-      "options": ["stream", "streaming", "continuous", "real_time"],
-      "correctAnswer": 0,
-      "explanation": "The 'stream' parameter controls whether to stream responses."
+      "question": "What does SQLAlchemySession support?",
+      "options": [
+        "Only SQLite databases",
+        "Only PostgreSQL databases",
+        "PostgreSQL, MySQL, and SQLite with async drivers",
+        "Only in-memory databases"
+      ],
+      "correctAnswer": 2,
+      "explanation": "SQLAlchemySession integrates with production databases supporting PostgreSQL, MySQL, and SQLite with async operations."
     },
     {
       "id": 46,
-      "question": "What is the purpose of the 'frequency_penalty' parameter?",
+      "question": "Which function sets the default OpenAI API key programmatically?",
       "options": [
-        "To penalize API usage frequency",
-        "To reduce repetition in responses",
-        "To limit how often tools are called",
-        "To control response frequency"
+        "configure_api_key()",
+        "set_api_key()",
+        "set_default_openai_key()",
+        "init_openai_key()"
       ],
-      "correctAnswer": 1,
-      "explanation": "The 'frequency_penalty' parameter reduces repetition in responses."
+      "correctAnswer": 2,
+      "explanation": "The set_default_openai_key('sk-...') function sets the API key programmatically, though it must occur before any SDK usage."
     },
     {
       "id": 47,
-      "question": "How do you disable all tools for a specific run?",
-      "options": [
-        "Set tools=None",
-        "Set tool_choice='none'",
-        "Use disable_tools=True",
-        "Remove all tools from agent"
-      ],
-      "correctAnswer": 1,
-      "explanation": "You disable all tools for a specific run by setting tool_choice='none'."
+      "question": "What does the ImageGenerationTool integrate with?",
+      "options": ["Midjourney", "Stable Diffusion", "DALL-E", "Adobe Firefly"],
+      "correctAnswer": 2,
+      "explanation": "ImageGenerationTool is a hosted tool that integrates with DALL-E for AI image generation capabilities."
     },
     {
       "id": 48,
-      "question": "What does the 'presence_penalty' parameter affect?",
+      "question": "Which property contains all items generated during execution in a RunResult?",
       "options": [
-        "Response length",
-        "Topic diversity",
-        "Tool usage",
-        "Processing speed"
+        "execution_items",
+        "generated_items",
+        "new_items",
+        "output_items"
       ],
-      "correctAnswer": 1,
-      "explanation": "The 'presence_penalty' parameter affects topic diversity."
+      "correctAnswer": 2,
+      "explanation": "The new_items property lists all items generated during execution, including messages, tool calls, tool outputs, and handoff events."
     },
     {
       "id": 49,
-      "question": "Which SOLID principle is demonstrated by using dependency injection for tools?",
+      "question": "What is the purpose of the is_enabled parameter in tools?",
       "options": [
-        "Single Responsibility",
-        "Open/Closed",
-        "Dependency Inversion",
-        "Interface Segregation"
+        "To activate tool permissions",
+        "To dynamically enable or disable tools at runtime",
+        "To check tool compatibility",
+        "To validate tool schemas"
       ],
-      "correctAnswer": 2,
-      "explanation": "Dependency Inversion principle is demonstrated by using dependency injection for tools."
+      "correctAnswer": 1,
+      "explanation": "The is_enabled parameter allows tools to be dynamically enabled or disabled at runtime based on context or conditions."
     },
     {
       "id": 50,
-      "question": "How can you validate tool parameters before execution?",
+      "question": "Which docstring formats does the SDK support for tool parameter descriptions?",
       "options": [
-        "Using JSON Schema validation",
-        "Through type hints and annotations",
-        "With custom validation decorators",
-        "All of the above"
+        "Only Google format",
+        "Only reStructuredText",
+        "Google, Sphinx, and NumPy formats",
+        "Only plain text"
       ],
-      "correctAnswer": 3,
-      "explanation": "Tool parameters can be validated using JSON Schema validation, type hints and annotations, or custom validation decorators."
+      "correctAnswer": 2,
+      "explanation": "The SDK uses griffe to parse docstrings, supporting Google, Sphinx, and NumPy formats for extracting parameter descriptions."
     },
     {
       "id": 51,
-      "question": "What method starts the agent execution?",
+      "question": "What does the OpenAIConversationsSession do?",
       "options": [
-        "runner.start()",
-        "runner.execute()",
-        "runner.run()",
-        "runner.begin()"
+        "Stores conversations in a local database",
+        "Leverages OpenAI's hosted conversation management",
+        "Encrypts all conversation data",
+        "Compresses conversation history"
       ],
-      "correctAnswer": 2,
-      "explanation": "The runner.run() method starts the agent execution."
+      "correctAnswer": 1,
+      "explanation": "OpenAIConversationsSession leverages OpenAI's hosted conversation management, eliminating local storage entirely."
     },
     {
       "id": 52,
-      "question": "What happens during each iteration of the agent loop?",
+      "question": "Which parameter limits the output length of model responses?",
       "options": [
-        "Model is retrained",
-        "Input is processed and response is generated",
-        "Configuration is reloaded",
-        "All agents are synchronized"
+        "output_limit",
+        "response_length",
+        "max_tokens",
+        "token_limit"
       ],
-      "correctAnswer": 1,
-      "explanation": "During each iteration, input is processed and response is generated."
+      "correctAnswer": 2,
+      "explanation": "The max_tokens parameter in ModelSettings limits output length, useful for cost control or latency optimization."
     },
     {
       "id": 53,
-      "question": "How does the runner handle tool execution?",
+      "question": "What is the primary difference between handoffs and agents-as-tools?",
       "options": [
-        "Ignores tool calls",
-        "Executes tools and feeds results back to the model",
-        "Delegates to external services",
-        "Stores tool calls for later execution"
+        "Handoffs are faster than agents-as-tools",
+        "Handoffs transfer control completely; agents-as-tools return to caller",
+        "Agents-as-tools require more configuration",
+        "Handoffs can only work with OpenAI models"
       ],
       "correctAnswer": 1,
-      "explanation": "The runner executes tools and feeds results back to the model."
+      "explanation": "Handoffs transfer control completely to the new agent, while agents-as-tools return to the caller after execution, maintaining orchestrator control."
     },
     {
       "id": 54,
-      "question": "What is the purpose of the 'stream' parameter in runner.run()?",
+      "question": "Which method provides type-safe extraction of final output?",
       "options": [
-        "To enable data streaming",
-        "To receive responses incrementally",
-        "To process multiple requests",
-        "To improve performance"
+        "extract_output()",
+        "get_output_as()",
+        "final_output_as()",
+        "cast_output()"
       ],
-      "correctAnswer": 1,
-      "explanation": "The 'stream' parameter allows receiving responses incrementally."
+      "correctAnswer": 2,
+      "explanation": "The final_output_as(Type) method provides type-safe extraction, casting final_output to the specified type with validation."
     },
     {
       "id": 55,
-      "question": "How can you access the conversation history?",
+      "question": "What does the frequency_penalty parameter do?",
       "options": [
-        "runner.get_history()",
-        "Through the session object",
-        "runner.messages",
-        "history.get_all()"
+        "Increases response frequency",
+        "Reduces token repetition",
+        "Controls API call frequency",
+        "Adjusts sampling frequency"
       ],
       "correctAnswer": 1,
-      "explanation": "Conversation history is accessed through the session object."
+      "explanation": "The frequency_penalty parameter (range -2.0 to 2.0) reduces token repetition in model outputs."
     },
     {
       "id": 56,
-      "question": "What does the runner return when a tool is called?",
+      "question": "Which MCP transport type spawns local subprocesses?",
       "options": [
-        "Tool result immediately",
-        "Response object with tool call information",
-        "None",
-        "Error message"
+        "MCPServerHttp",
+        "MCPServerLocal",
+        "MCPServerStdio",
+        "MCPServerProcess"
       ],
-      "correctAnswer": 1,
-      "explanation": "The runner returns a Response object with tool call information."
+      "correctAnswer": 2,
+      "explanation": "MCPServerStdio spawns local subprocesses communicating via stdin/stdout, perfect for command-line MCP servers."
     },
     {
       "id": 57,
-      "question": "How does the agent loop terminate?",
+      "question": "What is the purpose of the presence_penalty parameter?",
       "options": [
-        "After a fixed number of iterations",
-        "When the model provides a final response without tool calls",
-        "When timeout is reached",
-        "When user disconnects"
+        "Controls API rate limiting",
+        "Manages user presence detection",
+        "Encourages topic diversity",
+        "Reduces latency"
       ],
-      "correctAnswer": 1,
-      "explanation": "The agent loop terminates when the model provides a final response without tool calls."
+      "correctAnswer": 2,
+      "explanation": "The presence_penalty parameter (range -2.0 to 2.0) encourages topic diversity in model outputs."
     },
     {
       "id": 58,
-      "question": "What is the purpose of the session parameter?",
+      "question": "Which stream event signals agent changes during handoffs?",
       "options": [
-        "To manage user authentication",
-        "To maintain conversation context",
-        "To handle HTTP sessions",
-        "To control database connections"
+        "HandoffStreamEvent",
+        "AgentUpdatedStreamEvent",
+        "AgentChangeEvent",
+        "TransferStreamEvent"
       ],
       "correctAnswer": 1,
-      "explanation": "The session parameter maintains conversation context."
+      "explanation": "AgentUpdatedStreamEvent signals agent changes during handoffs, enabling real-time workflow visualization."
     },
     {
       "id": 59,
-      "question": "How can you implement custom pre-processing logic?",
+      "question": "What does the tool_choice parameter value 'required' mean?",
       "options": [
-        "Override runner.preprocess()",
-        "Use middleware",
-        "Create a custom tool",
-        "Modify the input before calling run()"
+        "The tool must be installed",
+        "The LLM must use a tool",
+        "The tool requires authentication",
+        "The tool needs approval"
       ],
-      "correctAnswer": 3,
-      "explanation": "Custom pre-processing logic is implemented by modifying the input before calling run()."
+      "correctAnswer": 1,
+      "explanation": "When tool_choice is set to 'required', the LLM must use a tool rather than responding with text only."
     },
     {
       "id": 60,
-      "question": "What happens when max_turns is reached?",
+      "question": "Which function enables verbose logging for debugging?",
       "options": [
-        "Error is raised",
-        "Agent stops executing",
-        "Agent continues indefinitely",
-        "Session is reset"
+        "set_debug_mode()",
+        "enable_logging()",
+        "enable_verbose_stdout_logging()",
+        "configure_logging()"
       ],
-      "correctAnswer": 1,
-      "explanation": "When max_turns is reached, the agent stops executing."
+      "correctAnswer": 2,
+      "explanation": "The enable_verbose_stdout_logging() convenience function enables verbose logging output for debugging."
     },
     {
       "id": 61,
-      "question": "How does streaming affect the agent loop?",
+      "question": "What does the Runner.run_sync() method do?",
       "options": [
-        "Makes it slower",
-        "Yields partial responses as they're generated",
-        "Requires more memory",
-        "Disables tool calls"
+        "Synchronizes multiple agents",
+        "Wraps async run() for synchronous contexts",
+        "Runs tools synchronously",
+        "Syncs conversation history"
       ],
       "correctAnswer": 1,
-      "explanation": "Streaming yields partial responses as they're generated."
+      "explanation": "Runner.run_sync() wraps the async run() method for synchronous contexts like simple scripts, but cannot be used in existing event loops."
     },
     {
       "id": 62,
-      "question": "What is the role of the Runner in error handling?",
+      "question": "Which property identifies which agent produced the final output?",
       "options": [
-        "Ignores all errors",
-        "Catches and propagates exceptions appropriately",
-        "Automatically retries failed operations",
-        "Logs errors only"
+        "output_agent",
+        "final_agent",
+        "last_agent",
+        "responsible_agent"
       ],
-      "correctAnswer": 1,
-      "explanation": "The Runner catches and propagates exceptions appropriately."
+      "correctAnswer": 2,
+      "explanation": "The last_agent property identifies which agent produced the final output, critical in multi-agent workflows."
     },
     {
       "id": 63,
-      "question": "How can you implement agent handoffs in the loop?",
+      "question": "What is the purpose of the on_handoff callback?",
       "options": [
-        "By configuring handoffs in the agent",
-        "By manually switching agents",
-        "Through the transfer() function",
-        "Handoffs are automatic based on context"
+        "To validate handoff permissions",
+        "To execute when the handoff is invoked for side effects",
+        "To compress handoff data",
+        "To log all handoffs automatically"
       ],
-      "correctAnswer": 0,
-      "explanation": "Agent handoffs are implemented by configuring handoffs in the agent."
+      "correctAnswer": 1,
+      "explanation": "The on_handoff callback executes when the handoff is invoked, receiving context and enabling side effects like logging or notifications."
     },
     {
       "id": 64,
-      "question": "What information is typically included in a Response object?",
+      "question": "Which environment variable sets the default model globally?",
       "options": [
-        "Only the text response",
-        "Response text, tool calls, and metadata",
-        "Just the model name",
-        "Only error information"
+        "OPENAI_MODEL",
+        "DEFAULT_MODEL",
+        "OPENAI_DEFAULT_MODEL",
+        "SDK_DEFAULT_MODEL"
       ],
-      "correctAnswer": 1,
-      "explanation": "A Response object includes response text, tool calls, and metadata."
+      "correctAnswer": 2,
+      "explanation": "The OPENAI_DEFAULT_MODEL environment variable sets a different default model globally, e.g., 'export OPENAI_DEFAULT_MODEL=gpt-5'."
     },
     {
       "id": 65,
-      "question": "How does the runner manage state between turns?",
+      "question": "What does the HostedMCPTool run on?",
       "options": [
-        "Using global variables",
-        "Through the session object",
-        "In a database",
-        "State is not maintained"
+        "Local developer machines",
+        "OpenAI's infrastructure",
+        "Cloud serverless functions",
+        "Edge computing nodes"
       ],
       "correctAnswer": 1,
-      "explanation": "The runner manages state between turns through the session object."
+      "explanation": "HostedMCPTool runs on OpenAI's infrastructure with tools listed and invoked without Python callbacks."
     },
     {
       "id": 66,
-      "question": "What is the purpose of max_turns parameter?",
+      "question": "Which method retrieves all tools including MCP tools from an agent?",
       "options": [
-        "To limit API costs",
-        "To prevent infinite loops",
-        "To improve performance",
-        "To control response length"
+        "list_tools()",
+        "get_tools()",
+        "get_all_tools()",
+        "fetch_tools()"
       ],
-      "correctAnswer": 1,
-      "explanation": "The max_turns parameter prevents infinite loops."
+      "correctAnswer": 2,
+      "explanation": "The get_all_tools() method retrieves all tools including MCP tools from an agent configuration."
     },
     {
       "id": 67,
-      "question": "How can you access intermediate tool results?",
-      "options": [
-        "From the response object's messages",
-        "Through runner.tool_results",
-        "Via callback functions",
-        "Tool results are not accessible"
-      ],
-      "correctAnswer": 0,
-      "explanation": "Intermediate tool results can be accessed from the response object's messages."
+      "question": "What is the range for the temperature parameter?",
+      "options": ["0.0 to 1.0", "0.0 to 2.0", "0.0 to 5.0", "-1.0 to 1.0"],
+      "correctAnswer": 1,
+      "explanation": "Temperature ranges from 0.0 (deterministic) to 2.0 (highly random) for controlling response randomness."
     },
     {
       "id": 68,
-      "question": "What happens when an agent requests a handoff?",
+      "question": "Which parameter customizes how handoffs appear to the LLM?",
       "options": [
-        "Current agent stops and target agent takes over",
-        "Both agents run in parallel",
-        "Request is ignored",
-        "User must approve the handoff"
+        "handoff_name",
+        "tool_name_override",
+        "display_name",
+        "llm_name"
       ],
-      "correctAnswer": 0,
-      "explanation": "When an agent requests a handoff, the current agent stops and the target agent takes over."
+      "correctAnswer": 1,
+      "explanation": "The tool_name_override parameter customizes how the handoff appears to the LLM, improving routing accuracy."
     },
     {
       "id": 69,
-      "question": "How does the runner handle asynchronous tool execution?",
+      "question": "What does the verbosity parameter control in GPT-5 models?",
       "options": [
-        "Waits synchronously",
-        "Uses async/await pattern",
-        "Skips async tools",
-        "Converts to sync execution"
+        "Logging detail",
+        "Response length constraints",
+        "Reasoning step visibility",
+        "Token usage reporting"
       ],
       "correctAnswer": 1,
-      "explanation": "The runner handles asynchronous tool execution using the async/await pattern."
+      "explanation": "The verbosity parameter ('low', 'medium', 'high') constrains response length in GPT-5 models."
     },
     {
       "id": 70,
-      "question": "What is the relationship between Runner and Session?",
-      "options": [
-        "Runner creates and manages Session",
-        "Session creates Runner",
-        "They are independent",
-        "Session is optional"
-      ],
-      "correctAnswer": 0,
-      "explanation": "Runner creates and manages Session."
+      "question": "Which class provides complete control over LLM integration?",
+      "options": ["CustomModel", "Model", "LLMIntegration", "ProviderModel"],
+      "correctAnswer": 1,
+      "explanation": "Direct Model implementation inheritance enables complete control over LLM integration by implementing the Model base class."
     },
     {
       "id": 71,
-      "question": "How can you implement custom post-processing?",
+      "question": "What does AgentOutputSchema allow?",
       "options": [
-        "Override runner.postprocess()",
-        "Process the response after run() returns",
-        "Use a custom tool",
-        "Modify agent instructions"
+        "Strict schema validation only",
+        "Non-strict schemas that allow additional properties",
+        "Schema versioning",
+        "Schema inheritance"
       ],
       "correctAnswer": 1,
-      "explanation": "Custom post-processing is implemented by processing the response after run() returns."
+      "explanation": "AgentOutputSchema supports non-strict schemas that allow additional properties beyond those defined in the model."
     },
     {
       "id": 72,
-      "question": "What triggers a new turn in the agent loop?",
+      "question": "Which parameter adds custom attributes to traces?",
       "options": [
-        "Time interval",
-        "User input or tool execution completion",
-        "Random events",
-        "System signals"
+        "trace_attributes",
+        "custom_metadata",
+        "trace_metadata",
+        "trace_tags"
       ],
-      "correctAnswer": 1,
-      "explanation": "A new turn is triggered by user input or tool execution completion."
+      "correctAnswer": 2,
+      "explanation": "The trace_metadata parameter in RunConfig adds custom attributes to traces for additional context."
     },
     {
       "id": 73,
-      "question": "How does the runner handle multiple sequential tool calls?",
+      "question": "What does the LocalShellTool enable?",
       "options": [
-        "Executes them in order within the same turn",
-        "Requires multiple turns",
-        "Executes only the first tool",
-        "Randomly selects one tool"
+        "Remote SSH access",
+        "Command execution on the local system",
+        "Shell script generation",
+        "Terminal emulation"
       ],
-      "correctAnswer": 0,
-      "explanation": "The runner executes multiple sequential tool calls in order within the same turn."
+      "correctAnswer": 1,
+      "explanation": "LocalShellTool is a hosted tool that enables command execution on the local system."
     },
     {
       "id": 74,
-      "question": "What is the purpose of context management in the runner?",
+      "question": "Which method is used to disable tracing globally?",
       "options": [
-        "To manage file operations",
-        "To maintain conversation history and state",
-        "To handle authentication",
-        "To optimize memory usage"
+        "disable_tracing()",
+        "set_tracing_disabled(True)",
+        "turn_off_tracing()",
+        "tracing_enable(False)"
       ],
       "correctAnswer": 1,
-      "explanation": "Context management maintains conversation history and state."
+      "explanation": "The set_tracing_disabled(True) function disables tracing globally across all runs."
     },
     {
       "id": 75,
-      "question": "How can you implement custom retry logic?",
+      "question": "What is the purpose of the strict_mode parameter in @function_tool?",
       "options": [
-        "Use built-in retry decorator",
-        "Wrap run() call in try-except with loop",
-        "Configure retry_attempts parameter",
-        "Retries are automatic"
+        "Enables strict error handling",
+        "Enforces strict naming conventions",
+        "Enables strict JSON validation",
+        "Requires strict type annotations"
       ],
-      "correctAnswer": 1,
-      "explanation": "Custom retry logic is implemented by wrapping run() call in try-except with loop."
+      "correctAnswer": 2,
+      "explanation": "The strict_mode parameter in @function_tool enables strict JSON validation for tool parameters."
     },
     {
       "id": 76,
-      "question": "What does the @function_tool decorator do?",
+      "question": "Which property contains guardrail evaluation results in RunResult?",
       "options": [
-        "Optimizes function performance",
-        "Converts a Python function into an agent tool",
-        "Adds logging to functions",
-        "Makes functions asynchronous"
+        "guardrail_outputs",
+        "validation_results",
+        "input_guardrail_results and output_guardrail_results",
+        "guardrail_checks"
       ],
-      "correctAnswer": 1,
-      "explanation": "The @function_tool decorator converts a Python function into an agent tool."
+      "correctAnswer": 2,
+      "explanation": "The input_guardrail_results and output_guardrail_results properties contain guardrail evaluation results."
     },
     {
       "id": 77,
-      "question": "What information does @function_tool extract from a function?",
+      "question": "What does the conversation_id parameter enable?",
       "options": [
-        "Only the function name",
-        "Function signature, docstring, and type hints",
-        "Return type only",
-        "Execution time"
+        "Local conversation tracking",
+        "OpenAI's server-side conversation management",
+        "Conversation encryption",
+        "Multi-user conversations"
       ],
       "correctAnswer": 1,
-      "explanation": "@function_tool extracts function signature, docstring, and type hints."
+      "explanation": "The conversation_id parameter enables OpenAI's server-side conversation state management without local sessions."
     },
     {
       "id": 78,
-      "question": "How should you document a function tool?",
+      "question": "Which exception indicates SDK misuse such as invalid parameters?",
       "options": [
-        "Using comments",
-        "In a separate file",
-        "Using docstrings",
-        "Documentation is optional"
+        "ConfigurationError",
+        "UserError",
+        "SDKException",
+        "ParameterError"
       ],
-      "correctAnswer": 2,
-      "explanation": "Function tools should be documented using docstrings."
+      "correctAnswer": 1,
+      "explanation": "UserError indicates SDK misuse such as invalid parameters or incorrect configuration."
     },
     {
       "id": 79,
-      "question": "What happens if a tool function raises an exception?",
+      "question": "What does the custom_output_extractor function do in agents-as-tools?",
       "options": [
-        "The exception is passed to the model",
-        "The agent loop crashes",
-        "The exception is silently ignored",
-        "Execution continues without the tool"
+        "Validates tool outputs",
+        "Transforms RunResult objects into tool outputs",
+        "Extracts error messages",
+        "Compresses output data"
       ],
-      "correctAnswer": 0,
-      "explanation": "If a tool function raises an exception, it is passed to the model."
+      "correctAnswer": 1,
+      "explanation": "The custom_output_extractor function transforms RunResult objects into tool outputs, useful for extracting specific data."
     },
     {
       "id": 80,
-      "question": "Can function tools be asynchronous?",
+      "question": "Which session implementation is recommended for distributed deployments?",
       "options": [
-        "No, only synchronous functions",
-        "Yes, using async def",
-        "Only with special configuration",
-        "Async is not supported"
+        "SQLiteSession",
+        "FileSession",
+        "Redis-based sessions",
+        "MemorySession"
       ],
-      "correctAnswer": 1,
-      "explanation": "Function tools can be asynchronous using async def."
+      "correctAnswer": 2,
+      "explanation": "Redis-based sessions are recommended for distributed deployments enabling horizontal scaling across multiple servers."
     },
     {
       "id": 81,
-      "question": "How do you specify required parameters for a tool?",
+      "question": "What does the failure_error_function parameter do?",
       "options": [
-        "Using @required decorator",
-        "Through function signature without defaults",
-        "In tool configuration",
-        "All parameters are required by default"
+        "Logs all failures automatically",
+        "Enables custom error handling for tool failures",
+        "Disables error reporting",
+        "Sends error notifications"
       ],
       "correctAnswer": 1,
-      "explanation": "Required parameters are specified through function signature without defaults."
+      "explanation": "The failure_error_function parameter enables custom error handling for tool failures, allowing custom error messages or logging."
     },
     {
       "id": 82,
-      "question": "What types can be used as tool parameters?",
+      "question": "Which transport type is ideal for publicly accessible MCP servers?",
       "options": [
-        "Only strings",
-        "JSON-serializable types",
-        "Any Python type",
-        "Only primitives"
+        "MCPServerStdio",
+        "MCPServerSse",
+        "HostedMCPTool",
+        "MCPServerLocal"
       ],
-      "correctAnswer": 1,
-      "explanation": "JSON-serializable types can be used as tool parameters."
+      "correctAnswer": 2,
+      "explanation": "HostedMCPTool is ideal for publicly accessible servers or OpenAI connectors, running entirely on OpenAI's infrastructure."
     },
     {
       "id": 83,
-      "question": "How does the model know what a tool does?",
+      "question": "What does the top_p parameter provide?",
       "options": [
-        "Through the tool name only",
-        "From the function's docstring and signature",
-        "By testing the tool",
-        "Models inherently know all tools"
+        "Priority ordering",
+        "Nucleus sampling as an alternative to temperature",
+        "Top result filtering",
+        "Probability threshold"
       ],
       "correctAnswer": 1,
-      "explanation": "The model knows what a tool does from the function's docstring and signature."
+      "explanation": "The top_p parameter (0.0-1.0) provides nucleus sampling as an alternative to temperature for controlling randomness."
     },
     {
       "id": 84,
-      "question": "Can a tool call another agent?",
-      "options": [
-        "No, tools cannot call agents",
-        "Yes, tools can invoke agents",
-        "Only in special cases",
-        "Only if explicitly configured"
-      ],
+      "question": "Which lifecycle hook executes when a tool starts?",
+      "options": ["tool_started", "on_tool_start", "before_tool", "tool_begin"],
       "correctAnswer": 1,
-      "explanation": "Tools can invoke agents."
+      "explanation": "The on_tool_start hook executes when a tool starts, enabling logging and monitoring at tool execution points."
     },
     {
       "id": 85,
-      "question": "What should a tool function return?",
+      "question": "What does the previous_response_id parameter enable?",
       "options": [
-        "Always a string",
-        "Any JSON-serializable value",
-        "None",
-        "A Response object"
+        "Response caching",
+        "Response chaining where each turn links to the previous response",
+        "Response versioning",
+        "Response rollback"
       ],
       "correctAnswer": 1,
-      "explanation": "A tool function should return any JSON-serializable value."
+      "explanation": "The previous_response_id parameter enables response chaining where each turn explicitly links to the previous response."
     },
     {
       "id": 86,
-      "question": "How are tool results communicated back to the model?",
+      "question": "Which method fetches only MCP server tools from an agent?",
       "options": [
-        "Through global variables",
-        "As tool messages in the conversation",
-        "Via callback functions",
-        "Through database updates"
+        "get_mcp_tools()",
+        "fetch_mcp_tools()",
+        "list_mcp_tools()",
+        "retrieve_mcp_tools()"
       ],
-      "correctAnswer": 1,
-      "explanation": "Tool results are communicated as tool messages in the conversation."
+      "correctAnswer": 0,
+      "explanation": "The get_mcp_tools() method fetches only MCP server tools from an agent configuration."
     },
     {
       "id": 87,
-      "question": "Can you have optional parameters in a function tool?",
+      "question": "What does ModelBehaviorError indicate?",
       "options": [
-        "No, all parameters must be required",
-        "Yes, using default values",
-        "Only with special annotation",
-        "Optional parameters are ignored"
+        "Model not found",
+        "Unexpected LLM behavior like malformed JSON",
+        "Model rate limiting",
+        "Model deprecation"
       ],
       "correctAnswer": 1,
-      "explanation": "Optional parameters are supported using default values."
+      "explanation": "ModelBehaviorError covers unexpected LLM behavior like malformed JSON or invalid tool calls."
     },
     {
       "id": 88,
-      "question": "What is the purpose of type hints in function tools?",
+      "question": "Which parameter controls whether to include token usage statistics?",
       "options": [
-        "For documentation only",
-        "To generate tool schema and validate inputs",
-        "To improve performance",
-        "Type hints are ignored"
+        "track_usage",
+        "include_usage",
+        "usage_enabled",
+        "count_tokens"
       ],
       "correctAnswer": 1,
-      "explanation": "Type hints generate tool schema and validate inputs."
+      "explanation": "The include_usage parameter in ModelSettings controls whether to include token usage statistics, required for LiteLLM tracking."
     },
     {
       "id": 89,
-      "question": "How can you prevent a tool from being called in certain situations?",
+      "question": "What is the purpose of the group_id in tracing?",
       "options": [
-        "Remove it from the agent",
-        "Use tool_choice parameter",
-        "Raise an exception in the tool",
-        "Both A and B"
+        "To group agents together",
+        "To associate multiple conversations or traces",
+        "To define user groups",
+        "To organize tools by category"
       ],
-      "correctAnswer": 3,
-      "explanation": "You can prevent a tool from being called by removing it from the agent or using tool_choice parameter."
+      "correctAnswer": 1,
+      "explanation": "The group_id in RunConfig associates multiple conversations or traces, for example, all traces in a chat thread."
     },
     {
       "id": 90,
-      "question": "What is the best practice for tool naming?",
+      "question": "Which function configures a custom OpenAI client?",
       "options": [
-        "Use short abbreviations",
-        "Use descriptive, clear names",
-        "Use random names",
-        "Names don't matter"
+        "configure_client()",
+        "set_openai_client()",
+        "set_default_openai_client()",
+        "init_client()"
       ],
-      "correctAnswer": 1,
-      "explanation": "Best practice is to use descriptive, clear names for tools."
+      "correctAnswer": 2,
+      "explanation": "The set_default_openai_client() function accepts an AsyncOpenAI instance configured with custom parameters."
     },
     {
       "id": 91,
-      "question": "Can tools access external APIs?",
+      "question": "What does the StopAtTools behavior do?",
       "options": [
-        "No, tools are sandboxed",
-        "Yes, tools can make external calls",
-        "Only with special permissions",
-        "External access is disabled"
+        "Prevents all tool usage",
+        "Stops at specific tools based on tool names",
+        "Halts on tool errors",
+        "Disables tool streaming"
       ],
       "correctAnswer": 1,
-      "explanation": "Tools can make external calls to access external APIs."
+      "explanation": "StopAtTools(stop_at_tool_names=[...]) stops execution at specific tools, enabling sophisticated control flow."
     },
     {
       "id": 92,
-      "question": "How do you handle tool execution timeouts?",
+      "question": "Which class is the base for all SDK exceptions?",
       "options": [
-        "Set timeout in @function_tool",
-        "Implement timeout logic within the tool",
-        "Use async with timeout",
-        "Timeouts are automatic"
+        "SDKException",
+        "BaseException",
+        "AgentsException",
+        "RuntimeException"
       ],
-      "correctAnswer": 1,
-      "explanation": "Tool execution timeouts are handled by implementing timeout logic within the tool."
+      "correctAnswer": 2,
+      "explanation": "AgentsException serves as the base class for all SDK exceptions, useful for catching any SDK-related error."
     },
     {
       "id": 93,
-      "question": "What happens if a tool returns None?",
+      "question": "What does the workflow_name parameter do in RunConfig?",
       "options": [
-        "Error is raised",
-        "None is passed to the model",
-        "Tool call is ignored",
-        "Default value is used"
+        "Names the agent workflow",
+        "Enables logical grouping of traces",
+        "Sets the execution strategy",
+        "Defines the workflow version"
       ],
       "correctAnswer": 1,
-      "explanation": "If a tool returns None, it is passed to the model."
+      "explanation": "The workflow_name parameter in RunConfig enables logical grouping of traces for related operations."
     },
     {
       "id": 94,
-      "question": "Can you dynamically add tools to an agent?",
+      "question": "Which parameter enables caching of MCP tool discovery results?",
       "options": [
-        "No, tools must be defined at creation",
-        "Yes, by creating a new agent with additional tools",
-        "Yes, using agent.add_tool()",
-        "Tools are immutable"
+        "enable_cache",
+        "cache_enabled",
+        "cache_tools_list",
+        "use_tool_cache"
       ],
-      "correctAnswer": 1,
-      "explanation": "Tools can be dynamically added by creating a new agent with additional tools."
+      "correctAnswer": 2,
+      "explanation": "The cache_tools_list=True parameter on MCP servers caches tool discovery results when tool lists change infrequently."
     },
     {
       "id": 95,
-      "question": "What is the purpose of structured outputs in tools?",
+      "question": "What does the trace_include_sensitive_data parameter control?",
       "options": [
-        "To format responses nicely",
-        "To ensure consistent data structures",
-        "To improve performance",
-        "Structured outputs are deprecated"
+        "Encryption of trace data",
+        "Whether to include LLM and tool inputs/outputs in traces",
+        "Access permissions for traces",
+        "Trace retention duration"
       ],
       "correctAnswer": 1,
-      "explanation": "Structured outputs ensure consistent data structures."
+      "explanation": "The trace_include_sensitive_data parameter controls whether to include LLM and tool inputs/outputs in traces."
     },
     {
       "id": 96,
-      "question": "How should errors be communicated from a tool?",
+      "question": "Which pattern uses a central orchestrator invoking specialists?",
       "options": [
-        "Return error string",
-        "Raise appropriate exceptions",
-        "Log errors only",
-        "Errors should never occur"
+        "Delegation Pattern",
+        "Manager Pattern",
+        "Coordinator Pattern",
+        "Hub Pattern"
       ],
       "correctAnswer": 1,
-      "explanation": "Errors should be communicated by raising appropriate exceptions."
+      "explanation": "The Manager Pattern uses agents-as-tools where a central orchestrator invokes specialized sub-agents and retains conversation control."
     },
     {
       "id": 97,
-      "question": "Can tools have side effects?",
-      "options": [
-        "No, tools must be pure functions",
-        "Yes, tools can modify state or external systems",
-        "Only read operations allowed",
-        "Side effects are automatically prevented"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Tools can have side effects and modify state or external systems."
+      "question": "What does MCPServerSse use for communication?",
+      "options": ["WebSockets", "HTTP polling", "Server-Sent Events", "gRPC"],
+      "correctAnswer": 2,
+      "explanation": "MCPServerSse uses Server-Sent Events (SSE) for real-time updates and communication."
     },
     {
       "id": 98,
-      "question": "What is the recommended pattern for tools that perform actions?",
+      "question": "Which parameter accepts a Prompt object for external configuration?",
       "options": [
-        "Always confirm before action",
-        "Execute immediately",
-        "Depends on use case and safety requirements",
-        "Actions are not allowed"
+        "external_prompt",
+        "prompt_config",
+        "prompt",
+        "dynamic_prompt"
       ],
       "correctAnswer": 2,
-      "explanation": "The pattern depends on use case and safety requirements."
+      "explanation": "The prompt parameter accepts a Prompt object or dynamic function for external prompt configuration with version control."
     },
     {
       "id": 99,
-      "question": "How can you test function tools?",
+      "question": "What is returned by the stream_events() method?",
       "options": [
-        "Only through agent interaction",
-        "Call them directly as regular Python functions",
-        "Testing is not possible",
-        "Use special testing framework"
+        "A list of events",
+        "An async generator yielding event objects",
+        "A JSON stream",
+        "A callback function"
       ],
       "correctAnswer": 1,
-      "explanation": "Function tools can be tested by calling them directly as regular Python functions."
+      "explanation": "The stream_events() method returns an async generator yielding real-time event objects during execution."
     },
     {
       "id": 100,
-      "question": "What is the relationship between tools and agent instructions?",
+      "question": "Which feature enables approval workflows in MCP servers?",
       "options": [
-        "They are independent",
-        "Instructions guide when and how to use tools",
-        "Instructions override tools",
-        "Tools override instructions"
+        "approval_enabled",
+        "require_approval",
+        "enable_validation",
+        "use_approval"
       ],
       "correctAnswer": 1,
-      "explanation": "Instructions guide when and how to use tools."
+      "explanation": "The require_approval parameter configures approval workflows where tool calls require validation before execution."
     },
     {
       "id": 101,
-      "question": "What is the primary purpose of guardrails in the SDK?",
+      "question": "What does the @input_guardrail decorator do?",
       "options": [
-        "To improve performance",
-        "To enforce safety and policy constraints",
-        "To format responses",
-        "To manage API keys"
+        "Creates a new agent with guardrails",
+        "Marks a function as an input guardrail for agents",
+        "Validates user input syntax",
+        "Encrypts input data"
       ],
       "correctAnswer": 1,
-      "explanation": "Guardrails enforce safety and policy constraints in the SDK."
+      "explanation": "The @input_guardrail decorator marks an async function as an input guardrail that can be used with agents to validate incoming requests."
     },
     {
       "id": 102,
-      "question": "Where can guardrails be applied?",
+      "question": "What does the @output_guardrail decorator do?",
       "options": [
-        "Only on inputs",
-        "Only on outputs",
-        "On inputs, outputs, and tool calls",
-        "Guardrails are automatic"
+        "Formats output for display",
+        "Marks a function as an output guardrail for agents",
+        "Compresses output data",
+        "Logs all outputs automatically"
       ],
-      "correctAnswer": 2,
-      "explanation": "Guardrails can be applied on inputs, outputs, and tool calls."
+      "correctAnswer": 1,
+      "explanation": "The @output_guardrail decorator marks an async function as an output guardrail that validates agent responses before they are delivered."
     },
     {
       "id": 103,
-      "question": "How do you implement a custom guardrail?",
+      "question": "What type does GuardrailFunctionOutput contain for triggering execution halts?",
       "options": [
-        "Extend the Guardrail base class",
-        "Use @guardrail decorator",
-        "Configure in settings",
-        "Guardrails cannot be customized"
+        "halt_execution",
+        "stop_agent",
+        "tripwire_triggered",
+        "block_request"
       ],
-      "correctAnswer": 0,
-      "explanation": "Custom guardrails are implemented by extending the Guardrail base class."
+      "correctAnswer": 2,
+      "explanation": "GuardrailFunctionOutput contains a tripwire_triggered boolean that, when True, halts execution immediately."
     },
     {
       "id": 104,
-      "question": "What happens when a guardrail violation occurs?",
+      "question": "Which function from handoff_filters removes all tool calls from conversation history?",
       "options": [
-        "Request is silently dropped",
-        "Exception is raised or custom handling is triggered",
-        "Warning is logged only",
-        "Request continues normally"
+        "remove_tools",
+        "filter_tools",
+        "remove_all_tools",
+        "clear_tool_history"
       ],
-      "correctAnswer": 1,
-      "explanation": "When a guardrail violation occurs, an exception is raised or custom handling is triggered."
+      "correctAnswer": 2,
+      "explanation": "The remove_all_tools function from agents.extensions.handoff_filters removes all tool calls from the conversation history during handoffs."
     },
     {
       "id": 105,
-      "question": "Can guardrails modify content?",
+      "question": "What is the purpose of the handoff_description parameter?",
       "options": [
-        "No, only block or allow",
-        "Yes, they can transform content",
-        "Only for specific content types",
-        "Modification is deprecated"
+        "Documents the handoff for developers",
+        "Provides a description to guide the LLM's handoff decision",
+        "Sets the handoff timeout duration",
+        "Defines handoff error messages"
       ],
       "correctAnswer": 1,
-      "explanation": "Guardrails can transform content."
+      "explanation": "The handoff_description parameter provides a description to the LLM to guide its decision on when to use that particular handoff."
     },
     {
       "id": 106,
-      "question": "What types of guardrails are commonly used?",
-      "options": [
-        "Content filtering only",
-        "Content filtering, PII detection, tone checking",
-        "Only security checks",
-        "Guardrails are predefined"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Common guardrails include content filtering, PII detection, and tone checking."
+      "question": "Which class represents a Realtime voice agent?",
+      "options": ["VoiceAgent", "AudioAgent", "RealtimeAgent", "StreamAgent"],
+      "correctAnswer": 2,
+      "explanation": "RealtimeAgent is the class used to create agents capable of handling voice interactions in real-time."
     },
     {
       "id": 107,
-      "question": "How can you implement rate limiting with guardrails?",
+      "question": "What does the RealtimeRunner class do?",
       "options": [
-        "Using time-based checks in a custom guardrail",
-        "Rate limiting is built-in",
-        "Through API configuration only",
-        "Rate limiting is not supported"
+        "Runs agents in parallel",
+        "Orchestrates realtime voice agent sessions",
+        "Manages agent deployment",
+        "Handles agent versioning"
       ],
-      "correctAnswer": 0,
-      "explanation": "Rate limiting can be implemented using time-based checks in a custom guardrail."
+      "correctAnswer": 1,
+      "explanation": "RealtimeRunner orchestrates realtime voice agent sessions, managing audio input/output and session events."
     },
     {
       "id": 108,
-      "question": "What is PII detection in the context of guardrails?",
+      "question": "Which function creates a handoff for RealtimeAgent?",
       "options": [
-        "Performance impact indicator",
-        "Personally Identifiable Information detection",
-        "Priority information indicator",
-        "Processing integrity indicator"
+        "create_realtime_handoff()",
+        "realtime_transfer()",
+        "realtime_handoff()",
+        "voice_handoff()"
       ],
-      "correctAnswer": 1,
-      "explanation": "PII detection refers to Personally Identifiable Information detection."
+      "correctAnswer": 2,
+      "explanation": "The realtime_handoff() function creates a handoff configuration specifically for RealtimeAgent instances."
     },
     {
       "id": 109,
-      "question": "Can guardrails be applied conditionally?",
+      "question": "What helper function adds handoff instructions to prompts?",
       "options": [
-        "No, always applied",
-        "Yes, based on logic within the guardrail",
-        "Only in production",
-        "Conditional logic is not supported"
+        "add_handoff_instructions()",
+        "prompt_with_handoff_instructions()",
+        "include_handoff_help()",
+        "enhance_prompt_handoffs()"
       ],
       "correctAnswer": 1,
-      "explanation": "Guardrails can be applied conditionally based on logic within the guardrail."
+      "explanation": "The prompt_with_handoff_instructions() function from agents.extensions.handoff_prompt adds handoff-related instructions to agent prompts."
     },
     {
       "id": 110,
-      "question": "How do guardrails affect performance?",
+      "question": "What class is used for managing voice pipelines?",
       "options": [
-        "No impact",
-        "Add processing overhead",
-        "Improve performance",
-        "Unpredictable impact"
+        "AudioPipeline",
+        "VoiceStream",
+        "VoicePipeline",
+        "RealtimePipeline"
       ],
-      "correctAnswer": 1,
-      "explanation": "Guardrails add processing overhead."
+      "correctAnswer": 2,
+      "explanation": "VoicePipeline is the class used for managing voice interaction pipelines with agents."
     },
     {
       "id": 111,
-      "question": "What is content moderation in guardrails?",
+      "question": "What workflow class handles single agent voice interactions?",
       "options": [
-        "Formatting content",
-        "Filtering inappropriate or unsafe content",
-        "Summarizing content",
-        "Translating content"
+        "SingleVoiceWorkflow",
+        "SimpleAgentWorkflow",
+        "SingleAgentVoiceWorkflow",
+        "UniAgentVoice"
       ],
-      "correctAnswer": 1,
-      "explanation": "Content moderation involves filtering inappropriate or unsafe content."
+      "correctAnswer": 2,
+      "explanation": "SingleAgentVoiceWorkflow is the workflow class designed to handle voice interactions with a single agent."
     },
     {
       "id": 112,
-      "question": "Can guardrails access external services?",
-      "options": [
-        "No, guardrails are isolated",
-        "Yes, for advanced checks like API-based moderation",
-        "Only in development",
-        "External access is blocked"
-      ],
+      "question": "What type of audio input does the SDK support by default?",
+      "options": ["mp3 and wav", "pcm16 format", "opus codec", "aac format"],
       "correctAnswer": 1,
-      "explanation": "Guardrails can access external services for advanced checks like API-based moderation."
+      "explanation": "The SDK supports pcm16 (16-bit PCM) audio format by default for both input and output in voice applications."
     },
     {
       "id": 113,
-      "question": "How should guardrail failures be logged?",
-      "options": [
-        "Not logged",
-        "With appropriate detail for monitoring and compliance",
-        "Only in debug mode",
-        "Logging is automatic"
-      ],
+      "question": "Which parameter specifies the voice to use in RealtimeAgent?",
+      "options": ["voice_id", "voice", "speaker", "audio_voice"],
       "correctAnswer": 1,
-      "explanation": "Guardrail failures should be logged with appropriate detail for monitoring and compliance."
+      "explanation": "The voice parameter in model_settings specifies which voice to use, such as 'ash', 'ballad', or 'verse'."
     },
     {
       "id": 114,
-      "question": "What is the relationship between guardrails and agent instructions?",
+      "question": "What does 'semantic_vad' turn detection type do?",
       "options": [
-        "They are the same",
-        "Guardrails enforce hard constraints, instructions guide behavior",
-        "Instructions override guardrails",
-        "No relationship"
+        "Uses volume-based detection",
+        "Uses semantic understanding for turn detection",
+        "Detects voice activity duration",
+        "Analyzes speech patterns"
       ],
       "correctAnswer": 1,
-      "explanation": "Guardrails enforce hard constraints while instructions guide behavior."
+      "explanation": "The 'semantic_vad' turn detection type uses semantic understanding to determine when a user has finished speaking, not just silence detection."
     },
     {
       "id": 115,
-      "question": "Can you chain multiple guardrails?",
+      "question": "Which parameter in turn_detection enables response interruption?",
       "options": [
-        "No, only one guardrail allowed",
-        "Yes, multiple guardrails can be applied in sequence",
-        "Only two guardrails maximum",
-        "Chaining is deprecated"
+        "allow_interrupt",
+        "interrupt_response",
+        "enable_interrupts",
+        "interruptible"
       ],
       "correctAnswer": 1,
-      "explanation": "Multiple guardrails can be applied in sequence."
+      "explanation": "The interrupt_response parameter in turn_detection configuration enables or disables the ability to interrupt agent responses."
     },
     {
       "id": 116,
-      "question": "What is the best practice for error messages in guardrails?",
+      "question": "What model is used for audio transcription in voice applications?",
       "options": [
-        "Generic messages only",
-        "Clear, informative messages without exposing sensitive details",
-        "No messages",
-        "Detailed technical errors"
+        "whisper-1",
+        "gpt-4o-mini-transcribe",
+        "audio-transcribe",
+        "realtime-transcribe"
       ],
       "correctAnswer": 1,
-      "explanation": "Best practice is to provide clear, informative messages without exposing sensitive details."
+      "explanation": "The gpt-4o-mini-transcribe model is used for input audio transcription in realtime voice applications."
     },
     {
       "id": 117,
-      "question": "How can you test guardrails?",
+      "question": "Which event type indicates audio output has ended?",
       "options": [
-        "Only in production",
-        "Using unit tests with sample inputs",
-        "Testing is not possible",
-        "Automatic testing only"
+        "audio_complete",
+        "audio_finished",
+        "audio_end",
+        "audio_stop"
       ],
-      "correctAnswer": 1,
-      "explanation": "Guardrails can be tested using unit tests with sample inputs."
+      "correctAnswer": 2,
+      "explanation": "The 'audio_end' event type signals that audio output from the agent has completed."
     },
     {
       "id": 118,
-      "question": "What is the purpose of output guardrails?",
+      "question": "What event type indicates audio was interrupted?",
       "options": [
-        "To format output",
-        "To ensure agent responses meet safety standards",
-        "To improve response quality",
-        "To cache responses"
+        "audio_stopped",
+        "audio_interrupted",
+        "audio_break",
+        "audio_cancelled"
       ],
       "correctAnswer": 1,
-      "explanation": "Output guardrails ensure agent responses meet safety standards."
+      "explanation": "The 'audio_interrupted' event type signals that audio playback was interrupted, typically by user speech."
     },
     {
       "id": 119,
-      "question": "Can guardrails be disabled for specific requests?",
+      "question": "Which modality setting enables both text and audio interactions?",
       "options": [
-        "No, always enforced",
-        "Yes, with appropriate configuration",
-        "Only by administrators",
-        "Disabling is not allowed"
+        "['text', 'audio']",
+        "['audio']",
+        "['multimodal']",
+        "['voice', 'text']"
       ],
-      "correctAnswer": 1,
-      "explanation": "Guardrails can be disabled for specific requests with appropriate configuration."
+      "correctAnswer": 0,
+      "explanation": "Setting modalities to ['text', 'audio'] enables both text and audio interactions with the agent."
     },
     {
       "id": 120,
-      "question": "What is the SOLID principle most relevant to guardrail design?",
+      "question": "What does the 'require_approval' parameter value 'always' do in MCP?",
       "options": [
-        "Single Responsibility",
-        "Open/Closed",
-        "Liskov Substitution",
-        "Interface Segregation"
+        "Requires password for every tool call",
+        "Requires approval for every tool invocation",
+        "Always logs tool calls",
+        "Always validates tool parameters"
       ],
       "correctAnswer": 1,
-      "explanation": "The Open/Closed principle is most relevant to guardrail design."
+      "explanation": "Setting require_approval to 'always' in MCP configuration requires explicit approval for every tool invocation."
     },
     {
       "id": 121,
-      "question": "Why integrate the SDK with FastAPI?",
+      "question": "What callback handles MCP tool approval requests?",
       "options": [
-        "To create web APIs for agent interactions",
-        "FastAPI is required for the SDK",
-        "For faster processing",
-        "To access database"
+        "on_tool_approval",
+        "approval_handler",
+        "on_approval_request",
+        "handle_approval"
       ],
-      "correctAnswer": 0,
-      "explanation": "FastAPI integration allows creating web APIs for agent interactions."
+      "correctAnswer": 2,
+      "explanation": "The on_approval_request callback receives MCPToolApprovalRequest objects and returns approval decisions."
     },
     {
       "id": 122,
-      "question": "How do you expose an agent as a REST endpoint?",
+      "question": "What type of MCP server connects to HTTP servers with low latency?",
       "options": [
-        "Agents are automatically exposed",
-        "Create FastAPI route that calls runner.run()",
-        "Use @expose decorator",
-        "Configure in settings"
+        "MCPServerHttp",
+        "MCPServerStreamableHttp",
+        "MCPServerFastHttp",
+        "MCPServerLowLatency"
       ],
       "correctAnswer": 1,
-      "explanation": "Agents are exposed as REST endpoints by creating FastAPI routes that call runner.run()."
+      "explanation": "MCPServerStreamableHttp connects to HTTP servers with optimized low-latency communication."
     },
     {
       "id": 123,
-      "question": "What is the recommended pattern for handling streaming responses in FastAPI?",
+      "question": "Which method retrieves dynamic prompts from MCP servers?",
       "options": [
-        "Use StreamingResponse",
-        "Use regular Response",
-        "Streaming not supported",
-        "Use WebSocket only"
+        "fetch_prompt()",
+        "load_prompt()",
+        "get_prompt()",
+        "retrieve_prompt()"
       ],
-      "correctAnswer": 0,
-      "explanation": "StreamingResponse is the recommended pattern for handling streaming responses in FastAPI."
+      "correctAnswer": 2,
+      "explanation": "The get_prompt() method retrieves dynamic prompts from MCP servers for context-aware instruction generation."
     },
     {
       "id": 124,
-      "question": "How do you manage sessions in a FastAPI application?",
+      "question": "What function creates static tool filters for MCP servers?",
       "options": [
-        "Using cookies",
-        "Store sessions in memory or database, associate with user",
-        "Sessions are automatic",
-        "Use JWT tokens"
+        "filter_tools()",
+        "create_tool_filter()",
+        "create_static_tool_filter()",
+        "setup_tool_filter()"
       ],
-      "correctAnswer": 1,
-      "explanation": "Sessions are managed by storing them in memory or database and associating with users."
+      "correctAnswer": 2,
+      "explanation": "The create_static_tool_filter() function creates simple allow/block list filters for MCP server tools."
     },
     {
       "id": 125,
-      "question": "What is the purpose of dependency injection in FastAPI with the SDK?",
+      "question": "Which parameter enables description override in @function_tool?",
       "options": [
-        "To inject runtime dependencies",
-        "To manage agent instances and shared resources",
-        "For authentication only",
-        "Dependency injection is not used"
+        "custom_description",
+        "override_description",
+        "description_override",
+        "new_description"
       ],
-      "correctAnswer": 1,
-      "explanation": "Dependency injection manages agent instances and shared resources."
+      "correctAnswer": 2,
+      "explanation": "The description_override parameter in @function_tool allows customizing the tool's description instead of using the docstring."
     },
     {
       "id": 126,
-      "question": "How should you handle errors in FastAPI endpoints?",
-      "options": [
-        "Let errors crash the server",
-        "Use try-except and return appropriate HTTP status codes",
-        "Ignore all errors",
-        "Log errors only"
-      ],
+      "question": "What parameter overrides the function name in @function_tool?",
+      "options": ["tool_name", "name_override", "custom_name", "function_name"],
       "correctAnswer": 1,
-      "explanation": "Errors should be handled using try-except and returning appropriate HTTP status codes."
+      "explanation": "The name_override parameter in @function_tool allows specifying a different name than the actual function name."
     },
     {
       "id": 127,
-      "question": "What is the benefit of async endpoints with the SDK?",
+      "question": "Which parameter disables docstring parsing in @function_tool?",
       "options": [
-        "No benefit",
-        "Better concurrency and resource utilization",
-        "Slower processing",
-        "Required for all endpoints"
+        "skip_docstring",
+        "disable_parsing",
+        "use_docstring_info",
+        "parse_docstring"
       ],
-      "correctAnswer": 1,
-      "explanation": "Async endpoints provide better concurrency and resource utilization."
+      "correctAnswer": 2,
+      "explanation": "Setting use_docstring_info=False in @function_tool disables automatic docstring parsing for parameter descriptions."
     },
     {
       "id": 128,
-      "question": "How do you implement authentication for agent endpoints?",
-      "options": [
-        "Authentication is built-in",
-        "Using FastAPI dependencies and middleware",
-        "Cannot implement authentication",
-        "Through agent configuration"
-      ],
+      "question": "What parameter explicitly sets the docstring parsing format?",
+      "options": ["doc_format", "docstring_style", "parse_style", "doc_style"],
       "correctAnswer": 1,
-      "explanation": "Authentication is implemented using FastAPI dependencies and middleware."
+      "explanation": "The docstring_style parameter explicitly sets the parsing format (Google, Sphinx, or NumPy) for function tool documentation."
     },
     {
       "id": 129,
-      "question": "What is the recommended way to validate request bodies?",
-      "options": [
-        "Manual validation",
-        "Using Pydantic models",
-        "No validation needed",
-        "JSON Schema only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Pydantic models are the recommended way to validate request bodies."
+      "question": "What class is used to manually create function tools?",
+      "options": ["Tool", "CustomTool", "FunctionTool", "ManualTool"],
+      "correctAnswer": 2,
+      "explanation": "The FunctionTool class can be instantiated directly for manual tool creation with explicit parameters."
     },
     {
       "id": 130,
-      "question": "How can you implement WebSocket support for real-time interactions?",
-      "options": [
-        "WebSockets not supported",
-        "Use FastAPI WebSocket endpoint with streaming",
-        "Requires separate server",
-        "Use HTTP polling only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "WebSocket support is implemented using FastAPI WebSocket endpoints with streaming."
+      "question": "Which parameter provides the tool execution callback in FunctionTool?",
+      "options": ["callback", "execute", "on_invoke_tool", "tool_function"],
+      "correctAnswer": 2,
+      "explanation": "The on_invoke_tool parameter in FunctionTool provides the callback that executes when the tool is invoked."
     },
     {
       "id": 131,
-      "question": "What is CORS and why is it important?",
+      "question": "What does ToolOutputImage represent?",
       "options": [
-        "Core Operating System",
-        "Cross-Origin Resource Sharing for browser security",
-        "Content Organization System",
-        "CORS is not relevant"
+        "An image file path",
+        "A tool output containing image data with URLs",
+        "An image processing tool",
+        "A visualization of tool outputs"
       ],
       "correctAnswer": 1,
-      "explanation": "CORS stands for Cross-Origin Resource Sharing and is important for browser security."
+      "explanation": "ToolOutputImage represents a tool output containing image data, typically with URLs pointing to the images."
     },
     {
       "id": 132,
-      "question": "How do you handle file uploads in agent endpoints?",
+      "question": "What does ToolOutputFileContent represent?",
       "options": [
-        "File uploads not supported",
-        "Using FastAPI File and UploadFile",
-        "Only base64 encoding",
-        "Through separate service"
+        "File system access",
+        "A tool output containing file data with base64 encoding or file IDs",
+        "File download links",
+        "File metadata"
       ],
       "correctAnswer": 1,
-      "explanation": "File uploads are handled using FastAPI File and UploadFile."
+      "explanation": "ToolOutputFileContent represents a tool output containing file data, either as base64-encoded content or file IDs."
     },
     {
       "id": 133,
-      "question": "What is the purpose of background tasks in FastAPI?",
+      "question": "What session method is used in AdvancedSQLiteSession to organize conversations by turns?",
       "options": [
-        "For UI rendering",
-        "To run operations after returning response",
-        "For scheduled jobs only",
-        "Background tasks are deprecated"
+        "get_turns()",
+        "organize_by_turns()",
+        "get_conversation_by_turns()",
+        "fetch_turns()"
       ],
-      "correctAnswer": 1,
-      "explanation": "Background tasks run operations after returning the response."
+      "correctAnswer": 2,
+      "explanation": "The get_conversation_by_turns() method in AdvancedSQLiteSession organizes the conversation history by individual turns."
     },
     {
       "id": 134,
-      "question": "How should you structure a FastAPI app with multiple agents?",
+      "question": "Which AdvancedSQLiteSession method provides tool usage statistics?",
       "options": [
-        "One endpoint per agent",
-        "Router-based organization",
-        "Single endpoint for all",
-        "Multiple apps required"
+        "get_tool_stats()",
+        "tool_analytics()",
+        "get_tool_usage()",
+        "analyze_tools()"
       ],
-      "correctAnswer": 1,
-      "explanation": "FastAPI apps with multiple agents should use router-based organization."
+      "correctAnswer": 2,
+      "explanation": "The get_tool_usage() method in AdvancedSQLiteSession provides statistics on tool usage across the conversation."
     },
     {
       "id": 135,
-      "question": "What is the purpose of middleware in FastAPI?",
+      "question": "What method finds turns by content in AdvancedSQLiteSession?",
       "options": [
-        "Data storage",
-        "Request/response processing and cross-cutting concerns",
-        "UI rendering",
-        "Database access"
+        "search_turns()",
+        "find_content()",
+        "find_turns_by_content()",
+        "search_conversation()"
       ],
-      "correctAnswer": 1,
-      "explanation": "Middleware handles request/response processing and cross-cutting concerns."
+      "correctAnswer": 2,
+      "explanation": "The find_turns_by_content() method searches for turns containing specific content in AdvancedSQLiteSession."
     },
     {
       "id": 136,
-      "question": "How do you implement rate limiting in FastAPI?",
+      "question": "What does the ModelSettings.resolve() method do?",
       "options": [
-        "Built-in rate limiting",
-        "Using middleware or dependencies",
-        "Cannot implement rate limiting",
-        "Through API gateway only"
+        "Validates model configuration",
+        "Merges settings with non-None override values taking precedence",
+        "Resolves model name to model instance",
+        "Resolves conflicts in settings"
       ],
       "correctAnswer": 1,
-      "explanation": "Rate limiting is implemented using middleware or dependencies."
+      "explanation": "The ModelSettings.resolve() method merges settings, with non-None values from an override parameter taking precedence."
     },
     {
       "id": 137,
-      "question": "What is the benefit of using Pydantic models with agents?",
-      "options": [
-        "Faster execution",
-        "Type validation and documentation",
-        "Required for SDK",
-        "No benefit"
-      ],
+      "question": "What model parameter is recommended for realtime voice interactions?",
+      "options": ["gpt-4.1", "gpt-realtime", "gpt-voice", "gpt-audio"],
       "correctAnswer": 1,
-      "explanation": "Pydantic models provide type validation and documentation."
+      "explanation": "The 'gpt-realtime' model is specifically designed and recommended for realtime voice agent interactions."
     },
     {
       "id": 138,
-      "question": "How do you document agent APIs in FastAPI?",
+      "question": "Which class represents the Chat Completions API model in the SDK?",
       "options": [
-        "Manual documentation only",
-        "Automatic OpenAPI/Swagger documentation",
-        "Documentation not supported",
-        "Use external tools"
+        "ChatModel",
+        "CompletionsModel",
+        "OpenAIChatCompletionsModel",
+        "ChatCompletionModel"
       ],
-      "correctAnswer": 1,
-      "explanation": "FastAPI provides automatic OpenAPI/Swagger documentation."
+      "correctAnswer": 2,
+      "explanation": "OpenAIChatCompletionsModel represents the Chat Completions API for broader provider compatibility."
     },
     {
       "id": 139,
-      "question": "What is the recommended deployment strategy?",
+      "question": "Which class represents the Responses API model in the SDK?",
       "options": [
-        "Development server only",
-        "Production ASGI server like Uvicorn/Gunicorn",
-        "Apache only",
-        "IIS only"
+        "ResponseModel",
+        "OpenAIResponsesModel",
+        "ResponsesAPIModel",
+        "APIResponseModel"
       ],
       "correctAnswer": 1,
-      "explanation": "Production deployment should use ASGI servers like Uvicorn/Gunicorn."
+      "explanation": "OpenAIResponsesModel represents OpenAI's Responses API, which is the recommended choice for OpenAI models."
     },
     {
       "id": 140,
-      "question": "How do you handle long-running agent tasks?",
+      "question": "What does the 'store' parameter in ModelSettings enable?",
       "options": [
-        "Block until complete",
-        "Use background tasks or async processing",
-        "Not possible",
-        "Requires separate service"
+        "Local response caching",
+        "Database storage",
+        "Response storage for retrieval",
+        "Session persistence"
       ],
-      "correctAnswer": 1,
-      "explanation": "Long-running tasks should use background tasks or async processing."
+      "correctAnswer": 2,
+      "explanation": "The 'store' parameter in ModelSettings enables response storage for later retrieval."
     },
     {
       "id": 141,
-      "question": "What is the purpose of a Session object?",
+      "question": "What does the 'top_logprobs' parameter provide?",
       "options": [
-        "To manage HTTP sessions",
-        "To maintain conversation state and history",
-        "For database connections",
-        "For authentication"
+        "Top response rankings",
+        "Log probability scores for tokens",
+        "Confidence metrics",
+        "Error probability"
       ],
       "correctAnswer": 1,
-      "explanation": "Session objects maintain conversation state and history."
+      "explanation": "The 'top_logprobs' parameter provides log probability scores for the most likely tokens at each position."
     },
     {
       "id": 142,
-      "question": "How do you create a new session?",
+      "question": "What does RunItemStreamEvent provide during streaming?",
       "options": [
-        "Session.create()",
-        "new Session()",
-        "Session() or through runner",
-        "Sessions are automatic"
+        "Token-level updates",
+        "Item-level updates when complete items are produced",
+        "Error notifications",
+        "Progress percentage"
       ],
-      "correctAnswer": 2,
-      "explanation": "New sessions are created using Session() or through the runner."
+      "correctAnswer": 1,
+      "explanation": "RunItemStreamEvent provides item-level updates when complete items like messages or tool calls are produced during streaming."
     },
     {
       "id": 143,
-      "question": "What information does a session store?",
+      "question": "Which property in RunResult holds ModelResponse objects from all LLM calls?",
       "options": [
-        "Only the last message",
-        "Message history and context",
-        "User credentials",
-        "API keys"
+        "llm_responses",
+        "model_outputs",
+        "raw_responses",
+        "api_responses"
       ],
-      "correctAnswer": 1,
-      "explanation": "Sessions store message history and context."
+      "correctAnswer": 2,
+      "explanation": "The raw_responses property holds ModelResponse objects from all LLM calls during execution."
     },
     {
       "id": 144,
-      "question": "Can sessions be persisted?",
+      "question": "What does the 'current_agent' property indicate in RunResult?",
       "options": [
-        "No, sessions are memory-only",
-        "Yes, sessions can be serialized and stored",
-        "Only in development",
-        "Persistence is automatic"
+        "The agent currently executing",
+        "The last agent in the chain (deprecated, use last_agent)",
+        "The starting agent",
+        "The active agent pool"
       ],
       "correctAnswer": 1,
-      "explanation": "Sessions can be serialized and stored for persistence."
+      "explanation": "The 'current_agent' property (now deprecated in favor of last_agent) indicates which agent was last executing."
     },
     {
       "id": 145,
-      "question": "How do you retrieve conversation history from a session?",
-      "options": [
-        "session.history()",
-        "session.messages or similar accessor",
-        "history.get(session)",
-        "Cannot retrieve history"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Conversation history is retrieved using session.messages or similar accessor."
+      "question": "What library does the SDK use to parse function docstrings?",
+      "options": ["docutils", "sphinx", "griffe", "pydoc"],
+      "correctAnswer": 2,
+      "explanation": "The SDK uses the griffe library to parse function docstrings and extract parameter descriptions."
     },
     {
       "id": 146,
-      "question": "What happens when session context exceeds token limits?",
+      "question": "What does the 'extra_args' parameter in ModelSettings allow?",
       "options": [
-        "Error is raised",
-        "Older messages may be truncated or summarized",
-        "Session is reset",
-        "New session is created"
+        "Additional context data",
+        "Extra tools for the agent",
+        "Arbitrary keyword arguments passed directly to model APIs",
+        "Additional guardrails"
       ],
-      "correctAnswer": 1,
-      "explanation": "When context exceeds token limits, older messages may be truncated or summarized."
+      "correctAnswer": 2,
+      "explanation": "The 'extra_args' parameter allows passing arbitrary keyword arguments directly to model APIs for provider-specific features."
     },
     {
       "id": 147,
-      "question": "How can you implement custom session storage?",
-      "options": [
-        "Extend Session class",
-        "Implement custom serialization/deserialization",
-        "Cannot customize",
-        "Use database directly"
-      ],
+      "question": "Which parameter in ModelSettings accepts a Reasoning object for GPT-5?",
+      "options": ["thinking", "reasoning", "analysis", "cognitive_effort"],
       "correctAnswer": 1,
-      "explanation": "Custom session storage is implemented through custom serialization/deserialization."
+      "explanation": "The 'reasoning' parameter in ModelSettings accepts a Reasoning object to configure reasoning effort for GPT-5 models."
     },
     {
       "id": 148,
-      "question": "What is the role of session IDs?",
+      "question": "What does the 'metadata' parameter in ModelSettings provide?",
       "options": [
-        "For authentication",
-        "To uniquely identify and retrieve sessions",
-        "For logging only",
-        "Session IDs are not used"
+        "Agent metadata",
+        "Provider-specific metadata for requests",
+        "Tool metadata",
+        "Session metadata"
       ],
       "correctAnswer": 1,
-      "explanation": "Session IDs uniquely identify and retrieve sessions."
+      "explanation": "The 'metadata' parameter in ModelSettings provides provider-specific metadata that can be attached to API requests."
     },
     {
       "id": 149,
-      "question": "Can multiple agents share a session?",
+      "question": "Which environment variable disables LLM input/output logging in traces?",
       "options": [
-        "No, one session per agent",
-        "Yes, session can be passed between agents",
-        "Only in multi-agent mode",
-        "Sharing is deprecated"
+        "DISABLE_LLM_LOGGING",
+        "OPENAI_AGENTS_DISABLE_LLM_IO_LOGGING",
+        "NO_LLM_TRACE",
+        "HIDE_LLM_DATA"
       ],
       "correctAnswer": 1,
-      "explanation": "Sessions can be passed between multiple agents."
+      "explanation": "The OPENAI_AGENTS_DISABLE_LLM_IO_LOGGING environment variable disables logging of LLM inputs/outputs in traces."
     },
     {
       "id": 150,
-      "question": "How do you clear a session?",
+      "question": "Which environment variable disables tool input/output logging in traces?",
       "options": [
-        "session.clear()",
-        "Create a new session",
-        "session.reset()",
-        "Cannot clear sessions"
+        "NO_TOOL_LOGS",
+        "DISABLE_TOOL_TRACE",
+        "OPENAI_AGENTS_DISABLE_TOOL_IO_LOGGING",
+        "HIDE_TOOL_DATA"
       ],
-      "correctAnswer": 1,
-      "explanation": "Sessions are cleared by creating a new session."
-    },
-    {
-      "id": 151,
-      "question": "What is the difference between session and context?",
-      "options": [
-        "No difference",
-        "Session manages state, context is the current conversation history",
-        "Context is global, session is local",
-        "Session is deprecated"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session manages state while context is the current conversation history."
-    },
-    {
-      "id": 152,
-      "question": "How do you handle concurrent access to sessions?",
-      "options": [
-        "Concurrency is automatic",
-        "Use locks or ensure thread-safety",
-        "Concurrent access is not allowed",
-        "Sessions handle concurrency internally"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Concurrent access is handled using locks or ensuring thread-safety."
-    },
-    {
-      "id": 153,
-      "question": "What information should NOT be stored in sessions?",
-      "options": [
-        "Message history",
-        "Sensitive credentials or secrets",
-        "User preferences",
-        "Agent configuration"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Sensitive credentials or secrets should not be stored in sessions."
-    },
-    {
-      "id": 154,
-      "question": "How can you implement session timeouts?",
-      "options": [
-        "Built-in timeout mechanism",
-        "Track timestamp and expire manually",
-        "Timeouts are automatic",
-        "Cannot implement timeouts"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session timeouts are implemented by tracking timestamp and expiring manually."
-    },
-    {
-      "id": 155,
-      "question": "What is the best practice for session management in production?",
-      "options": [
-        "Store all sessions in memory",
-        "Use persistent storage like Redis or database",
-        "No session management needed",
-        "File-based storage only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Production session management should use persistent storage like Redis or database."
-    },
-    {
-      "id": 156,
-      "question": "How do sessions interact with agent handoffs?",
-      "options": [
-        "Sessions are reset on handoff",
-        "Session continues across handoffs",
-        "Handoffs create new sessions",
-        "No interaction"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Sessions continue across agent handoffs."
-    },
-    {
-      "id": 157,
-      "question": "Can you modify session history?",
-      "options": [
-        "No, history is immutable",
-        "Yes, but should be done carefully",
-        "Only by creating new session",
-        "Modification is automatic"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session history can be modified but should be done carefully."
-    },
-    {
-      "id": 158,
-      "question": "What is the purpose of session metadata?",
-      "options": [
-        "For model training",
-        "To store additional context and information",
-        "For billing",
-        "Metadata is not supported"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session metadata stores additional context and information."
-    },
-    {
-      "id": 159,
-      "question": "How do you handle session migration between versions?",
-      "options": [
-        "Sessions are automatically migrated",
-        "Implement serialization version handling",
-        "Migration is not possible",
-        "Start fresh sessions"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session migration is handled by implementing serialization version handling."
-    },
-    {
-      "id": 160,
-      "question": "What is the relationship between Session and Thread (in API terms)?",
-      "options": [
-        "They are the same",
-        "Session is the SDK's abstraction for conversation state",
-        "Thread is deprecated",
-        "No relationship"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Session is the SDK's abstraction for conversation state."
-    },
-    {
-      "id": 161,
-      "question": "What does MCP stand for?",
-      "options": [
-        "Multi-Client Protocol",
-        "Model Context Protocol",
-        "Message Control Protocol",
-        "Model Configuration Protocol"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP stands for Model Context Protocol."
-    },
-    {
-      "id": 162,
-      "question": "What is the primary purpose of MCP in the SDK?",
-      "options": [
-        "To encrypt messages",
-        "To enable standardized integration with external tools and data sources",
-        "To improve model accuracy",
-        "To manage API costs"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP enables standardized integration with external tools and data sources."
-    },
-    {
-      "id": 163,
-      "question": "How do you connect an MCP server to an agent?",
-      "options": [
-        "Through configuration in agent setup",
-        "MCP servers auto-connect",
-        "Using mcp.connect()",
-        "MCP is not supported"
-      ],
-      "correctAnswer": 0,
-      "explanation": "MCP servers are connected through configuration in agent setup."
-    },
-    {
-      "id": 164,
-      "question": "What types of resources can MCP provide?",
-      "options": [
-        "Only text files",
-        "Tools, prompts, and resources",
-        "Images only",
-        "Database connections only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP can provide tools, prompts, and resources."
-    },
-    {
-      "id": 165,
-      "question": "Can you create custom MCP servers?",
-      "options": [
-        "No, only predefined servers",
-        "Yes, following the MCP specification",
-        "Only with special license",
-        "Custom servers are deprecated"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Custom MCP servers can be created following the MCP specification."
-    },
-    {
-      "id": 166,
-      "question": "What protocol does MCP typically use for communication?",
-      "options": [
-        "HTTP REST",
-        "JSON-RPC over stdio or HTTP",
-        "gRPC",
-        "WebSocket only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP typically uses JSON-RPC over stdio or HTTP for communication."
-    },
-    {
-      "id": 167,
-      "question": "How does MCP enhance agent capabilities?",
-      "options": [
-        "Makes agents faster",
-        "Provides access to external systems and data",
-        "Reduces costs",
-        "Improves UI"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP enhances agent capabilities by providing access to external systems and data."
-    },
-    {
-      "id": 168,
-      "question": "What is an MCP resource?",
-      "options": [
-        "Server hardware",
-        "Data or content that can be accessed by agents",
-        "API key",
-        "Configuration file"
-      ],
-      "correctAnswer": 1,
-      "explanation": "An MCP resource is data or content that can be accessed by agents."
-    },
-    {
-      "id": 169,
-      "question": "Can agents use multiple MCP servers?",
-      "options": [
-        "No, only one server",
-        "Yes, multiple servers can be connected",
-        "Maximum two servers",
-        "Multiple servers cause conflicts"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Agents can use multiple MCP servers."
-    },
-    {
-      "id": 170,
-      "question": "What is the benefit of using MCP over custom integrations?",
-      "options": [
-        "No benefit",
-        "Standardization and easier integration",
-        "Faster execution",
-        "Lower cost"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP provides standardization and easier integration compared to custom integrations."
-    },
-    {
-      "id": 171,
-      "question": "How are MCP tools different from function tools?",
-      "options": [
-        "No difference",
-        "MCP tools come from external servers",
-        "Function tools are deprecated",
-        "MCP tools are faster"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP tools come from external servers, unlike function tools."
-    },
-    {
-      "id": 172,
-      "question": "What happens if an MCP server is unavailable?",
-      "options": [
-        "Agent cannot start",
-        "Error handling based on implementation",
-        "System crashes",
-        "Automatically switches to backup"
-      ],
-      "correctAnswer": 1,
-      "explanation": "When an MCP server is unavailable, error handling is based on implementation."
-    },
-    {
-      "id": 173,
-      "question": "Can MCP servers maintain state?",
-      "options": [
-        "No, stateless only",
-        "Yes, servers can maintain state",
-        "Only in memory",
-        "State is automatic"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP servers can maintain state."
-    },
-    {
-      "id": 174,
-      "question": "What security considerations exist with MCP?",
-      "options": [
-        "No security concerns",
-        "Authentication, authorization, and data validation",
-        "Security is automatic",
-        "Only encryption matters"
-      ],
-      "correctAnswer": 1,
-      "explanation": "MCP requires consideration of authentication, authorization, and data validation."
-    },
-    {
-      "id": 175,
-      "question": "How do you discover available MCP tools?",
-      "options": [
-        "Manual documentation",
-        "Through server capability discovery",
-        "Trial and error",
-        "Discovery is not supported"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Available MCP tools are discovered through server capability discovery."
-    },
-    {
-      "id": 176,
-      "question": "What is the Realtime API in the context of the SDK?",
-      "options": [
-        "A faster API",
-        "Low-latency, streaming API for voice and interactive applications",
-        "A real-time database",
-        "Realtime is not supported"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The Realtime API is a low-latency, streaming API for voice and interactive applications."
-    },
-    {
-      "id": 177,
-      "question": "How does streaming work in the SDK?",
-      "options": [
-        "Downloads entire response first",
-        "Yields response tokens incrementally",
-        "Caches responses",
-        "Streaming is not supported"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Streaming works by yielding response tokens incrementally."
-    },
-    {
-      "id": 178,
-      "question": "What is the primary use case for realtime agents?",
-      "options": [
-        "Batch processing",
-        "Voice conversations and interactive experiences",
-        "Data analysis",
-        "File processing"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Realtime agents are primarily used for voice conversations and interactive experiences."
-    },
-    {
-      "id": 179,
-      "question": "How do you enable streaming for a runner?",
-      "options": [
-        "streaming=True parameter",
-        "stream=True parameter",
-        "Streaming is always on",
-        "Use StreamRunner class"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Streaming is enabled using the stream=True parameter."
-    },
-    {
-      "id": 180,
-      "question": "What protocol is used for realtime communication?",
-      "options": ["HTTP REST", "WebSocket", "gRPC", "FTP"],
-      "correctAnswer": 1,
-      "explanation": "WebSocket is used for realtime communication."
-    },
-    {
-      "id": 181,
-      "question": "Can you use function tools with realtime agents?",
-      "options": [
-        "No, tools not supported",
-        "Yes, tools work with realtime agents",
-        "Only built-in tools",
-        "Tools are deprecated"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Function tools work with realtime agents."
-    },
-    {
-      "id": 182,
-      "question": "What is the benefit of streaming responses?",
-      "options": [
-        "Lower cost",
-        "Faster perceived response time",
-        "Better accuracy",
-        "No benefit"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Streaming responses provide faster perceived response time."
-    },
-    {
-      "id": 183,
-      "question": "How do you handle audio input in realtime agents?",
-      "options": [
-        "Audio not supported",
-        "Through audio format configuration and streaming",
-        "Convert to text first",
-        "Use separate API"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Audio input is handled through audio format configuration and streaming."
-    },
-    {
-      "id": 184,
-      "question": "What is the relationship between Realtime API and Agents SDK?",
-      "options": [
-        "No relationship",
-        "SDK provides abstractions over Realtime API",
-        "They are the same",
-        "Realtime replaces SDK"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The SDK provides abstractions over the Realtime API."
-    },
-    {
-      "id": 185,
-      "question": "How do you implement voice activity detection?",
-      "options": [
-        "VAD is automatic",
-        "Configure VAD settings in realtime session",
-        "Not supported",
-        "Use external library"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Voice activity detection is implemented by configuring VAD settings in realtime session."
-    },
-    {
-      "id": 186,
-      "question": "What is the purpose of turn detection in realtime?",
-      "options": [
-        "To count conversations",
-        "To detect when user finishes speaking",
-        "For billing",
-        "Not used"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Turn detection detects when the user finishes speaking."
-    },
-    {
-      "id": 187,
-      "question": "Can realtime agents handle interruptions?",
-      "options": [
-        "No, must finish speaking",
-        "Yes, with proper configuration",
-        "Only in text mode",
-        "Interruptions cause errors"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Realtime agents can handle interruptions with proper configuration."
-    },
-    {
-      "id": 188,
-      "question": "How do you configure audio output format?",
-      "options": [
-        "Format is fixed",
-        "Through modalities and audio settings",
-        "Use external converter",
-        "Audio output not supported"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Audio output format is configured through modalities and audio settings."
-    },
-    {
-      "id": 189,
-      "question": "What latency can be expected with realtime agents?",
-      "options": [
-        "Several seconds",
-        "Low latency suitable for voice conversations",
-        "Minutes",
-        "Variable and unpredictable"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Realtime agents have low latency suitable for voice conversations."
-    },
-    {
-      "id": 190,
-      "question": "How do you handle connection issues in realtime?",
-      "options": [
-        "Connection issues not handled",
-        "Implement reconnection logic and error handling",
-        "System automatically recovers",
-        "Restart application"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Connection issues are handled by implementing reconnection logic and error handling."
-    },
-    {
-      "id": 191,
-      "question": "What is the Open/Closed Principle in the SDK context?",
-      "options": [
-        "Code should be open source",
-        "Components open for extension, closed for modification",
-        "Files should be closed after use",
-        "Not applicable to SDK"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The Open/Closed Principle means components are open for extension but closed for modification."
-    },
-    {
-      "id": 192,
-      "question": "How does the SDK demonstrate Dependency Inversion?",
-      "options": [
-        "Through abstract interfaces for tools and components",
-        "By inverting dependencies",
-        "Using reverse imports",
-        "Not demonstrated"
-      ],
-      "correctAnswer": 0,
-      "explanation": "The SDK demonstrates Dependency Inversion through abstract interfaces for tools and components."
-    },
-    {
-      "id": 193,
-      "question": "What is the recommended approach for error handling?",
-      "options": [
-        "Ignore all errors",
-        "Use try-except with specific exception types",
-        "Generic catch-all only",
-        "Let errors propagate"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The recommended approach is to use try-except with specific exception types."
-    },
-    {
-      "id": 194,
-      "question": "How should you structure complex multi-agent systems?",
-      "options": [
-        "Single agent for everything",
-        "Specialized agents with clear responsibilities",
-        "Random agent assignment",
-        "Structure doesn't matter"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Complex multi-agent systems should use specialized agents with clear responsibilities."
-    },
-    {
-      "id": 195,
-      "question": "What is the purpose of tracing in the SDK?",
-      "options": [
-        "For debugging only",
-        "To monitor, debug, and analyze agent behavior",
-        "For billing",
-        "Tracing is deprecated"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Tracing is used to monitor, debug, and analyze agent behavior."
-    },
-    {
-      "id": 196,
-      "question": "How can you optimize token usage?",
-      "options": [
-        "Use longer instructions",
-        "Manage context, use summarization, clear instructions",
-        "Always use max_tokens",
-        "Token usage cannot be optimized"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Token usage is optimized by managing context, using summarization, and providing clear instructions."
-    },
-    {
-      "id": 197,
-      "question": "What is the recommended testing strategy?",
-      "options": [
-        "No testing needed",
-        "Unit tests for tools, integration tests for agents",
-        "Manual testing only",
-        "Production testing only"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The recommended strategy includes unit tests for tools and integration tests for agents."
-    },
-    {
-      "id": 198,
-      "question": "How should you handle sensitive data?",
-      "options": [
-        "Store in agent instructions",
-        "Use environment variables, secure storage, and proper access controls",
-        "Hardcode in source",
-        "Sensitive data handling not needed"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Sensitive data should be handled using environment variables, secure storage, and proper access controls."
-    },
-    {
-      "id": 199,
-      "question": "What is the Interface Segregation Principle example in SDK?",
-      "options": [
-        "One large interface for all functionality",
-        "Specific interfaces for different agent capabilities",
-        "No interfaces used",
-        "Not applicable"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The SDK demonstrates Interface Segregation through specific interfaces for different agent capabilities."
-    },
-    {
-      "id": 200,
-      "question": "What is the most important principle when building with the SDK?",
-      "options": [
-        "Use all features",
-        "Start simple, iterate based on needs, maintain clarity",
-        "Maximize complexity",
-        "Follow rigid patterns"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The most important principle is to start simple, iterate based on needs, and maintain clarity."
+      "correctAnswer": 2,
+      "explanation": "The OPENAI_AGENTS_DISABLE_TOOL_IO_LOGGING environment variable disables logging of tool inputs/outputs in traces."
     }
   ]
 }
