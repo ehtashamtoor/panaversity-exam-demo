@@ -83,7 +83,9 @@ export function ExamContainer() {
           } catch (error) {
             console.error("[FULLSCREEN] Failed to enter fullscreen:", error);
             // Show warning but still start exam
-            alert("Please allow fullscreen mode for the exam. Press F11 or allow fullscreen when prompted.");
+            alert(
+              "Please allow fullscreen mode for the exam. Press F11 or allow fullscreen when prompted."
+            );
             setExamState("exam");
           }
         }}
@@ -131,9 +133,6 @@ function ExamContent({
     isTimeUp,
   } = useTimer({
     totalSeconds: timerDuration * 60,
-    onTimeUp: () => {
-      setExamState("results");
-    },
     autoStart: false,
   });
 
@@ -147,21 +146,24 @@ function ExamContent({
     }
   }, [examState, timerDuration, startTimer]);
 
-  // Handle time up
+  // Handle time up - submit exam when timer expires
   useEffect(() => {
     if (isTimeUp && examState === "exam") {
+      submitExam();
       setExamState("results");
     }
-  }, [isTimeUp, examState, setExamState]);
+  }, [isTimeUp, examState, setExamState, submitExam]);
 
   // Enforce fullscreen - submit exam if exited
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement && examState === "exam") {
-        console.warn("[ANTI-CHEAT] Fullscreen exited - submitting exam");
         submitExam();
+        console.warn("[ANTI-CHEAT] Fullscreen exited - submitting exam");
         setExamState("results");
-        alert("Fullscreen mode was exited. Your exam has been submitted automatically.");
+        alert(
+          "Fullscreen mode was exited. Your exam has been submitted automatically."
+        );
       }
     };
 
